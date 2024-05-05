@@ -6,10 +6,10 @@
     "astro": "astro",
     "build": "astro check && astro build",
     "dev": "astro dev",
-    "icons": "svgo --config svgo-icons.config.cjs -r -f ./src/assets/icons -o ./src/assets/icons",
     "preview": "astro preview",
     "start": "astro dev",
-    "svgs": "svgo --config svgo.config.cjs -r -f ./src/assets/svgs -o ./src/assets/svgs"
+    "svgo:icons": "svgo --config svgo-icons.config.cjs -r -f ./src/assets/icons -o ./src/assets/icons",
+    "svgo:svgs": "svgo --config svgo.config.cjs -r -f ./src/assets/svgs -o ./src/assets/svgs"
   },
   "dependencies": {
     "@astrojs/check": "0.5.10",
