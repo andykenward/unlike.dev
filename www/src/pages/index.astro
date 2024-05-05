@@ -1,0 +1,18 @@
+---
+import Clients from "../components/Clients.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Technology from "../components/Technology.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <main
+    class="mx-auto grid max-w-screen-2xl flex-1 grid-cols-1 content-center items-center justify-center gap-y-20"
+  >
+    <Header />
+    <Clients />
+    <Technology />
+  </main>
+  <Footer />
+</Layout>

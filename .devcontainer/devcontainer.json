@@ -18,6 +18,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "astro-build.astro-vscode",
+        "bradlc.vscode-tailwindcss",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
         "github.vscode-github-actions",

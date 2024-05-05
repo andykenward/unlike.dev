@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title={"Not Found"}>
+  <main class="grid h-screen place-items-center">
+    <article class="text-center">
+      <h2 class="m-0 text-center text-4xl sm:text-5xl">404</h2>
+      <a
+        class="underline hover:no-underline focus-visible:no-underline"
+        rel="noopener noreferrer nofollow"
+        href={Astro.site}>Take me home.</a
+      >
+    </article>
+  </main>
+</Layout>

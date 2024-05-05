@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+
+const CLIENTS = await getCollection("clients").then((data) =>
+  data.sort((a, b) => b.data.sortOrder - a.data.sortOrder),
+);
+---
+
+<section>
+  <h2 id="clients" class="mb-2 text-left text-3xl font-normal">
+    <a href="#clients">Clients:</a>
+  </h2>
+  <ul
+    aria-labelledby="clients"
+    class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
+  >
+    {
+      CLIENTS.map(({ data: { href, title, asset } }) => (
+        <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center ">
+          <a
+            href={href}
+            aria-label={title}
+            title={title}
+            rel="noreferrer"
+            class="group size-full select-none bg-transparent transition-[background,filter] duration-300 ease-linear hover:bg-black focus-visible:bg-black dark:bg-transparent dark:hover:bg-white dark:focus-visible:bg-white"
+          >
+            <img
+              alt={`${title} Logo`}
+              width={asset.width}
+              height={asset.height}
+              src={asset.src}
+              class="size-full group-hover:invert group-focus-visible:invert dark:invert dark:group-hover:invert-0 dark:group-focus-visible:invert-0"
+            />
+            <span aria-hidden="true" class="sr-only">
+              {title}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+
+const TAGS = await getCollection("tags").then((data) =>
+  data.filter((item) => !item.id.startsWith("legacy/")),
+);
+
+const TAGS_CMS = TAGS.filter((item) => item.id.startsWith("cms/"));
+const TAGS_CSS = TAGS.filter((item) => item.id.startsWith("css/"));
+const TAGS_FRAMEWORK = TAGS.filter((item) => item.id.startsWith("framework/"));
+const TAGS_GRAPHQL = TAGS.filter((item) => item.id.startsWith("graphql/"));
+const TAGS_LANG = TAGS.filter((item) => item.id.startsWith("language/"));
+const TAGS_PLATFORM = TAGS.filter((item) => item.id.startsWith("platform/"));
+const TAGS_REACT = TAGS.filter((item) => item.id.startsWith("react/"));
+const TAGS_TESTING = TAGS.filter((item) => item.id.startsWith("testing/"));
+const TAGS_TOOL = TAGS.filter((item) => item.id.startsWith("tool/"));
+
+const ORDERED_TAGS = [
+  TAGS_LANG,
+  TAGS_REACT,
+  TAGS_GRAPHQL,
+  TAGS_FRAMEWORK,
+  TAGS_PLATFORM,
+  TAGS_CSS,
+  TAGS_CMS,
+  TAGS_TESTING,
+  TAGS_TOOL,
+];
+---
+
+<section>
+  <h2 id="tech" class="mx-auto mb-5 text-left text-3xl font-normal">
+    <a href="#tech">Experienced in:</a>
+  </h2>
+  <ul
+    aria-labelledby="tech"
+    class="mx-auto flex flex-wrap text-lg [&>li:last-child]:after:hidden [&>li]:inline-flex [&>li]:after:mx-2 [&>li]:after:content-['•']"
+  >
+    {
+      ORDERED_TAGS.map((tags) =>
+        tags.map(({ data }) => (
+          <li>
+            <a
+              class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
+              href={data.href}
+              rel="noopener noreferrer"
+            >
+              {data.title}
+            </a>
+          </li>
+        )),
+      )
+    }
+  </ul>
+</section>

@@ -1,0 +1,28 @@
+{
+  "name": "www",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro check && astro build",
+    "dev": "astro dev",
+    "icons": "svgo --config svgo-icons.config.cjs -r -f ./src/assets/icons -o ./src/assets/icons",
+    "preview": "astro preview",
+    "start": "astro dev",
+    "svgs": "svgo --config svgo.config.cjs -r -f ./src/assets/svgs -o ./src/assets/svgs"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.5.10",
+    "@astrojs/sitemap": "3.1.4",
+    "@astrojs/tailwind": "5.1.0",
+    "@fontsource/atkinson-hyperlegible": "5.0.20",
+    "@fontsource/righteous": "5.0.20",
+    "@tailwindcss/container-queries": "0.1.1",
+    "astro": "4.7.1",
+    "tailwindcss": "3.4.3",
+    "typescript": "5.4.5"
+  },
+  "devDependencies": {
+    "svgo": "3.2.0"
+  }
+}

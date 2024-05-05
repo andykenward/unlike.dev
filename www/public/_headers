@@ -1,0 +1,38 @@
+/*
+    Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-D0jFZ4zkWaWWQjsOVTROetjrPTsbJ8VM12qdTO591sM=' cloudflareinsights.com; connect-src 'self' cloudflareinsights.com; script-src-elem 'self' 'nonce-D0jFZ4zkWaWWQjsOVTROetjrPTsbJ8VM12qdTO591sM=' cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+    X-Frame-Options: DENY
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    Permissions-Policy: autoplay=(), camera=(), geolocation=(), microphone=(), payment=()
+    Referrer-Policy: strict-origin-when-cross-origin
+
+
+/404
+    ! Cache-Control
+    Cache-Control: public, max-age=31536000, immutable
+
+/404.html
+    ! Cache-Control
+    Cache-Control: public, max-age=31536000, immutable
+
+/_astro/*
+    ! Cache-Control
+    ! Content-Security-Policy
+    ! Permissions-Policy
+    ! X-XSS-Protection
+    Cache-Control: public, max-age=31536000, immutable
+    X-Robots-Tag: none
+
+/*.ico
+    ! Content-Security-Policy
+    ! X-XSS-Protection
+
+/*.svg
+    ! Content-Security-Policy
+    ! X-XSS-Protection
+
+https://:project.pages.dev/*
+    X-Robots-Tag: none
+
+https://:branch.:project.pages.dev/*
+    X-Robots-Tag: none

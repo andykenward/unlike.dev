@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import { EMAIL, SITE_DESCRIPTION, SITE_TITLE } from "../config";
+
+const SOCIAL = await getCollection("social").then((data) =>
+  data.sort((a, b) => a.data.sortOrder - b.data.sortOrder),
+);
+---
+
+<header class="flex flex-col items-start gap-y-2">
+  <h1
+    class="font-brand -indent-1.5 text-[clamp(4.5rem,4vw+4rem,16rem)] font-normal leading-none tracking-tighter"
+  >
+    {SITE_TITLE}
+  </h1>
+  <div>
+    <h2 class="text-lg [text-wrap:balance] sm:text-2xl">
+      {SITE_DESCRIPTION}
+    </h2>
+    <h3 class="text-lg [text-wrap:balance] sm:text-2xl">
+      By <a
+        class="underline decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-transparent focus-visible:decoration-transparent"
+        rel="noreferrer"
+        href="https://www.linkedin.com/in/andykenward/">Andy Kenward</a
+      >
+    </h3>
+    <h4 class="text-lg [text-wrap:balance] sm:text-2xl">London, England</h4>
+  </div>
+  <a
+    class="text-xl underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current"
+    href=`mailto:${EMAIL}`>{EMAIL}</a
+  >
+  <div class="flex gap-2">
+    {
+      SOCIAL.map(({ data: { title, href, asset } }) => (
+        <a
+          aria-label={title}
+          title={title}
+          href={href}
+          rel="noreferrer"
+          class="group select-none text-4xl transition-[filter] duration-300 ease-linear"
+        >
+          <img
+            alt={`${title}`}
+            width={asset.width}
+            height={asset.height}
+            src={asset.src}
+            class="group-hover:invert-40 group-focus-visible:invert-40 dark:group-hover:invert-60 dark:group-focus-visible:invert-60 size-9 dark:invert "
+          />
+        </a>
+      ))
+    }
+  </div>
+</header>
