@@ -1,27 +1,28 @@
 {
   "name": "unlike-dev",
   "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky",
-    "prettier": "npx prettier . --write"
+  "homepage": "https://github.com/andykenward/unlike.dev#readme",
+  "bugs": {
+    "url": "https://github.com/andykenward/unlike.dev/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/andykenward/unlike.dev.git"
   },
-  "author": "@andykenward",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/andykenward/unlike.dev/issues"
+  "author": "@andykenward",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "prettier": "npx prettier . --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/andykenward/unlike.dev#readme",
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "prettier": "3.2.5"
+    "prettier": "^3.2.5",
+    "prettier-plugin-packagejson": "^2.5.0"
   }
 }

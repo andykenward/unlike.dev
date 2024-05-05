@@ -1,4 +1,6 @@
 /** @type {import("prettier").Config} */
-const config = {};
+const config = {
+  plugins: ["prettier-plugin-packagejson"],
+};
 
 export default config;
