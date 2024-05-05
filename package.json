@@ -1,8 +1,10 @@
 {
   "name": "unlike-dev",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky || true"
   },
   "repository": {
     "type": "git",
@@ -13,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/andykenward/unlike.dev/issues"
   },
-  "homepage": "https://github.com/andykenward/unlike.dev#readme"
+  "homepage": "https://github.com/andykenward/unlike.dev#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^9.0.11"
+  }
 }
