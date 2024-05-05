@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json.schemastore.org/pre-commit-config.json
-exclude: '^$'
+exclude: "^$"
 fail_fast: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
