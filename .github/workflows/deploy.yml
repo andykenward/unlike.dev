@@ -27,7 +27,7 @@ jobs:
       - run: npm run build
         working-directory: ./www
       - name: "Deploy to Cloudflare Pages"
-        uses: andykenward/github-actions-cloudflare-pages@v2.2.0
+        uses: andykenward/github-actions-cloudflare-pages@v2.3.0
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -36,3 +36,10 @@ jobs:
           working-directory: www
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-environment: ${{ (github.ref == 'refs/heads/main' && 'production') || 'preview' }}
+      - name: "Deploy deletion from Cloudflare Pages"
+        uses: andykenward/github-actions-cloudflare-pages/delete@v2.3.0
+        if: github.ref == 'refs/heads/main'
+        with:
+          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          keep-latest: 2
