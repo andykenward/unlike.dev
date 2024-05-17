@@ -24,6 +24,7 @@ updates:
     assignees:
       - "andykenward"
     directory: "/"
+    versioning-strategy: increase
     schedule:
       interval: "weekly"
     groups:
