@@ -27,23 +27,3 @@ updates:
     versioning-strategy: increase
     schedule:
       interval: "weekly"
-    groups:
-      commitlint:
-        patterns:
-          - "@commitlint/*"
-      fontsource:
-        patterns:
-          - "@fontsource/*"
-      astro:
-        patterns:
-          - "astro"
-          - "@astrojs/*"
-      prettier:
-        patterns:
-          - "prettier"
-          - "prettier-plugin-*"
-          - "@ianvs/prettier-plugin-sort-imports"
-      tailwind:
-        patterns:
-          - "tailwindcss"
-          - "@tailwindcss/*"
