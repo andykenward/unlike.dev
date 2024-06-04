@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.5.10",
-    "@astrojs/sitemap": "3.1.4",
+    "@astrojs/sitemap": "3.1.5",
     "@astrojs/tailwind": "5.1.0",
     "@fontsource/atkinson-hyperlegible": "5.0.20",
     "@fontsource/righteous": "5.0.20",
