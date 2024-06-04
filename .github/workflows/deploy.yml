@@ -23,9 +23,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build
+          cache: "pnpm"
+      - run: pnpm i
+      - run: pnpm run build
         working-directory: ./www
       - name: "Deploy to Cloudflare Pages"
         uses: andykenward/github-actions-cloudflare-pages@v2.3.0
