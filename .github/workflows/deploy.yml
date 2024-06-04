@@ -19,16 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 #v4.1.6
+      - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 #v4.0.0
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
           node-version-file: "package.json"
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm run build
         working-directory: ./www
       - name: "Deploy to Cloudflare Pages"
-        uses: andykenward/github-actions-cloudflare-pages@v2.3.0
+        uses: andykenward/github-actions-cloudflare-pages@729e3e59a4977be918c8d7e2ff08ec4e1532d0d6 #v2.3.0
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -38,7 +39,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-environment: ${{ (github.ref == 'refs/heads/main' && 'production') || 'preview' }}
       - name: "Deploy deletion from Cloudflare Pages"
-        uses: andykenward/github-actions-cloudflare-pages/delete@v2.3.0
+        uses: andykenward/github-actions-cloudflare-pages/delete@729e3e59a4977be918c8d7e2ff08ec4e1532d0d6 #v2.3.0
         if: github.ref == 'refs/heads/main'
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
