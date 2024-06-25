@@ -25,7 +25,6 @@ updates:
       - "andykenward"
     directories:
       - "/"
-      - "/www"
     versioning-strategy: increase
     schedule:
       interval: "daily"
