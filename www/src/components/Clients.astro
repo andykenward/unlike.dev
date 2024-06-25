@@ -16,7 +16,7 @@ const CLIENTS = await getCollection("clients").then((data) =>
   >
     {
       CLIENTS.map(({ data: { href, title, asset } }) => (
-        <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center ">
+        <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">
           <a
             href={href}
             aria-label={title}
