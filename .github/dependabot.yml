@@ -23,7 +23,9 @@ updates:
   - package-ecosystem: "npm"
     assignees:
       - "andykenward"
-    directory: "/"
+    directories:
+      - "/"
+      - "/www"
     versioning-strategy: increase
     schedule:
       interval: "daily"
