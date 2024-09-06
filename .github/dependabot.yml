@@ -14,12 +14,16 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+      time: "12:00"
+      timezone: "Europe/London"
   - package-ecosystem: github-actions
     assignees:
       - "andykenward"
     directory: /
     schedule:
       interval: weekly
+      time: "12:00"
+      timezone: "Europe/London"
   - package-ecosystem: "npm"
     assignees:
       - "andykenward"
@@ -27,7 +31,9 @@ updates:
       - "/"
     versioning-strategy: increase
     schedule:
-      interval: "daily"
+      interval: weekly
+      time: "12:00"
+      timezone: "Europe/London"
     groups:
       commitlint:
         patterns:
