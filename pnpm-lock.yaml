@@ -42,11 +42,11 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(astro@4.15.3(@types/node@22.5.4)(rollup@4.21.2)(typescript@5.5.4))(tailwindcss@3.4.10)
       '@fontsource/atkinson-hyperlegible':
-        specifier: 5.0.21
-        version: 5.0.21
+        specifier: 5.1.0
+        version: 5.1.0
       '@fontsource/righteous':
-        specifier: 5.0.21
-        version: 5.0.21
+        specifier: 5.1.0
+        version: 5.1.0
       '@tailwindcss/container-queries':
         specifier: 0.1.1
         version: 0.1.1(tailwindcss@3.4.10)
@@ -436,11 +436,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource/atkinson-hyperlegible@5.0.21':
-    resolution: {integrity: sha512-wdfH+i/vkiV+wcR+jklZuFYFLfIcGU6bPqOS9YXbvDLMN+7dfPADVCSwkqMMriWR1hbhr/2TUfyBS3lak7IDkQ==}
+  '@fontsource/atkinson-hyperlegible@5.1.0':
+    resolution: {integrity: sha512-2qT7mpgHWYM0bB3+5zbcfy49PD5xil/8t3maXxdgFpJo2dFaD9qBgk5u72KgK7ZtmGOWbCjCoAk5e+vpOIqfvA==}
 
-  '@fontsource/righteous@5.0.21':
-    resolution: {integrity: sha512-9lT3ZXhxLcnm3QkbjGuLL/9pg9umuzT54zOhCrBh7DW68vt+qlNwFzs1FNy/Kx0qg60AZWLN5wrU9Rrxgdyzdg==}
+  '@fontsource/righteous@5.1.0':
+    resolution: {integrity: sha512-GzXGStldvzF4aWgcg8Dc0qIEMY5HfQfpmU0yfUv9UXuc+uEMLvx9jp/iWfuuqI3SaeDT9FHW4KSegCXzC8D6JQ==}
 
   '@ianvs/prettier-plugin-sort-imports@4.3.1':
     resolution: {integrity: sha512-ZHwbyjkANZOjaBm3ZosADD2OUYGFzQGxfy67HmGZU94mHqe7g1LCMA7YYKB1Cq+UTPCBqlAYapY0KXAjKEw8Sg==}
@@ -3043,9 +3043,9 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@fontsource/atkinson-hyperlegible@5.0.21': {}
+  '@fontsource/atkinson-hyperlegible@5.1.0': {}
 
-  '@fontsource/righteous@5.0.21': {}
+  '@fontsource/righteous@5.1.0': {}
 
   '@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.3)':
     dependencies:
