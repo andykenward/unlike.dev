@@ -12,7 +12,7 @@ const CLIENTS = await getCollection("clients").then((data) =>
   </h2>
   <ul
     aria-labelledby="clients"
-    class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
+    class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3"
   >
     {
       CLIENTS.map(({ data: { href, title, asset } }) => (
