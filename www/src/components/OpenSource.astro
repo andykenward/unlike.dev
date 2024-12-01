@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+
+const DATA = await getCollection("open-source");
+---
+
+<section>
+  <h2 id="open-source" class="mx-auto mb-5 text-left text-3xl font-normal">
+    <a href="#open-source">Open Source:</a>
+  </h2>
+  <ul
+    aria-labelledby="open-source"
+    class="mx-auto flex flex-wrap text-lg [&>li:last-child]:after:hidden [&>li]:inline-flex [&>li]:after:mx-2 [&>li]:after:content-['•']"
+  >
+    {
+      DATA.map((item) => (
+        <li>
+          <a
+            class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
+            href={item.data.href}
+            rel="noopener noreferrer"
+          >
+            {item.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

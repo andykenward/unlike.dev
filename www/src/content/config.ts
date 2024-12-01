@@ -40,8 +40,17 @@ const tagsCollection = defineCollection({
   }),
 });
 
+const openSourceCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    href: z.string().url(),
+  }),
+});
+
 export const collections = {
   clients: clientCollection,
   social: socialCollection,
   tags: tagsCollection,
+  "open-source": openSourceCollection,
 };
