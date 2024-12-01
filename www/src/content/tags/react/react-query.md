@@ -1,4 +1,4 @@
 ---
-title: React Query
-href: https://react-query-v3.tanstack.com
+title: TanStack Query
+href: https://tanstack.com/query/
 ---
