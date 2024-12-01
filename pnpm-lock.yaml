@@ -52,7 +52,7 @@ importers:
         version: 3.2.1
       '@astrojs/tailwind':
         specifier: 5.1.2
-        version: 5.1.2(astro@4.16.8(rollup@4.28.0)(typescript@5.6.3))(tailwindcss@3.4.14)
+        version: 5.1.2(astro@4.16.16(rollup@4.28.0)(typescript@5.6.3))(tailwindcss@3.4.14)
       '@fontsource/atkinson-hyperlegible':
         specifier: 5.1.0
         version: 5.1.0
@@ -63,8 +63,8 @@ importers:
         specifier: 0.1.1
         version: 0.1.1(tailwindcss@3.4.14)
       astro:
-        specifier: 4.16.8
-        version: 4.16.8(rollup@4.28.0)(typescript@5.6.3)
+        specifier: 4.16.16
+        version: 4.16.16(rollup@4.28.0)(typescript@5.6.3)
       tailwindcss:
         specifier: 3.4.14
         version: 3.4.14
@@ -918,8 +918,8 @@ packages:
     resolution: {integrity: sha512-F6NW1RJo5pp2kPnnM97M5Ohw8zAGjv83MpxHqfAochH68n/kiXN57+hYaNUCA7XkScoVNr6yzvly3hsY34TGfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  astro@4.16.8:
-    resolution: {integrity: sha512-BRWFP0UQ8gkOr90KQW7oooedtgCk/j91pyv1WQUmgZwMUZk/v0HJRiddAZgvGCECOnmZFc9ZqRZnBsAMUgApNQ==}
+  astro@4.16.16:
+    resolution: {integrity: sha512-H1CttrV6+JFrDBQx0Mcbq5i5AeLhCbztB786+9wEu3svWL/QPNeCGqF0dgNORAYmP+rODGCPu/y9qKSh87iLuA==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3231,9 +3231,9 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/tailwind@5.1.2(astro@4.16.8(rollup@4.28.0)(typescript@5.6.3))(tailwindcss@3.4.14)':
+  '@astrojs/tailwind@5.1.2(astro@4.16.16(rollup@4.28.0)(typescript@5.6.3))(tailwindcss@3.4.14)':
     dependencies:
-      astro: 4.16.8(rollup@4.28.0)(typescript@5.6.3)
+      astro: 4.16.16(rollup@4.28.0)(typescript@5.6.3)
       autoprefixer: 10.4.20(postcss@8.4.49)
       postcss: 8.4.49
       postcss-load-config: 4.0.2(postcss@8.4.49)
@@ -4020,7 +4020,7 @@ snapshots:
       - supports-color
       - typescript
 
-  astro@4.16.8(rollup@4.28.0)(typescript@5.6.3):
+  astro@4.16.16(rollup@4.28.0)(typescript@5.6.3):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.1
