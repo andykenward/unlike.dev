@@ -7,11 +7,11 @@ const CLIENTS = await getCollection("clients").then((data) =>
 ---
 
 <section>
-  <h2 id="clients" class="mb-2 text-left text-3xl font-normal">
-    <a href="#clients">Clients:</a>
+  <h2 id="experience" class="mb-2 text-left text-3xl font-normal">
+    <a href="#experience">Experience:</a>
   </h2>
   <ul
-    aria-labelledby="clients"
+    aria-labelledby="experience"
     class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3"
   >
     {
@@ -21,7 +21,7 @@ const CLIENTS = await getCollection("clients").then((data) =>
             href={href}
             aria-label={title}
             title={title}
-            rel="noreferrer"
+            rel="noreferrer nofollow"
             class="group size-full select-none bg-transparent transition-[background,filter] duration-300 ease-linear hover:bg-black focus-visible:bg-black dark:bg-transparent dark:hover:bg-white dark:focus-visible:bg-white"
           >
             <img
