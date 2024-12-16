@@ -10,17 +10,28 @@ const DATA = await getCollection("open-source");
   </h2>
   <ul
     aria-labelledby="open-source"
-    class="mx-auto flex flex-wrap text-lg [&>li:last-child]:after:hidden [&>li]:inline-flex [&>li]:after:mx-2 [&>li]:after:content-['•']"
+    class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3"
   >
     {
-      DATA.map((item) => (
+      DATA.map(({ data: { href, title, asset } }) => (
         <li>
           <a
-            class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
-            href={item.data.href}
+            href={href}
+            aria-label={title}
+            title={title}
             rel="noreferrer nofollow"
+            class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
           >
-            {item.data.title}
+            <img
+              alt={`${title} Logo`}
+              width={asset.width}
+              height={asset.height}
+              src={asset.src}
+              class="size-full bg-white"
+            />
+            <span aria-hidden="true" class="sr-only">
+              {title}
+            </span>
           </a>
         </li>
       ))
