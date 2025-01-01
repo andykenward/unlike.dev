@@ -25,6 +25,7 @@ const CLIENTS = await getCollection("clients").then((data) =>
             class="group size-full select-none bg-transparent transition-[background,filter] duration-300 ease-linear hover:bg-black focus-visible:bg-black dark:bg-transparent dark:hover:bg-white dark:focus-visible:bg-white"
           >
             <img
+              loading="lazy"
               alt={`${title} Logo`}
               width={asset.width}
               height={asset.height}
