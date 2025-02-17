@@ -54,11 +54,11 @@ importers:
         specifier: 5.1.5
         version: 5.1.5(astro@5.1.10(jiti@2.4.2)(rollup@4.32.1)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.17)
       '@fontsource/atkinson-hyperlegible':
-        specifier: 5.1.0
-        version: 5.1.0
+        specifier: 5.1.1
+        version: 5.1.1
       '@fontsource/righteous':
-        specifier: 5.1.0
-        version: 5.1.0
+        specifier: 5.1.1
+        version: 5.1.1
       '@tailwindcss/container-queries':
         specifier: 0.1.1
         version: 0.1.1(tailwindcss@3.4.17)
@@ -379,11 +379,11 @@ packages:
     resolution: {integrity: sha512-zSkKow6H5Kdm0ZUQUB2kV5JIXqoG0+uH5YADhaEHswm664N9Db8dXSi0nMJpacpMf+MyyglF1vnZohpEg5yUtg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fontsource/atkinson-hyperlegible@5.1.0':
-    resolution: {integrity: sha512-2qT7mpgHWYM0bB3+5zbcfy49PD5xil/8t3maXxdgFpJo2dFaD9qBgk5u72KgK7ZtmGOWbCjCoAk5e+vpOIqfvA==}
+  '@fontsource/atkinson-hyperlegible@5.1.1':
+    resolution: {integrity: sha512-AxjSa0Ld2CrHqz3GV0gHVY7R5ySBw5c1B7FXLz59aUeFK9rJNm5ivc14qzYKaDi0lYCjFQtfpqb9pklie91PeA==}
 
-  '@fontsource/righteous@5.1.0':
-    resolution: {integrity: sha512-GzXGStldvzF4aWgcg8Dc0qIEMY5HfQfpmU0yfUv9UXuc+uEMLvx9jp/iWfuuqI3SaeDT9FHW4KSegCXzC8D6JQ==}
+  '@fontsource/righteous@5.1.1':
+    resolution: {integrity: sha512-KfNF78uVk/5K0hti7+R7/SlV0v02Z+qTzRbrTNuWasqIZim5a2YslHwdr0VDnkmfBqOzbYTRfi/NPNTTk0siYA==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -3527,9 +3527,9 @@ snapshots:
     dependencies:
       levn: 0.4.1
 
-  '@fontsource/atkinson-hyperlegible@5.1.0': {}
+  '@fontsource/atkinson-hyperlegible@5.1.1': {}
 
-  '@fontsource/righteous@5.1.0': {}
+  '@fontsource/righteous@5.1.1': {}
 
   '@humanfs/core@0.19.1': {}
 
