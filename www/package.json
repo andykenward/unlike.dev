@@ -13,14 +13,13 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
-    "@astrojs/sitemap": "3.2.1",
-    "@astrojs/tailwind": "5.1.5",
-    "@fontsource/atkinson-hyperlegible": "5.1.0",
-    "@fontsource/righteous": "5.1.0",
+    "@astrojs/sitemap": "3.4.0",
+    "@fontsource/atkinson-hyperlegible": "5.2.5",
+    "@fontsource/righteous": "5.2.5",
     "@tailwindcss/container-queries": "0.1.1",
-    "astro": "5.1.10",
+    "astro": "5.7.13",
     "tailwindcss": "3.4.17",
-    "typescript": "5.7.2"
+    "typescript": "5.8.3"
   },
   "devDependencies": {
     "svgo": "3.3.2"
