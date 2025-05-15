@@ -16,7 +16,6 @@
     "@astrojs/sitemap": "3.4.0",
     "@fontsource/atkinson-hyperlegible": "5.2.5",
     "@fontsource/righteous": "5.2.5",
-    "@tailwindcss/container-queries": "0.1.1",
     "@tailwindcss/vite": "^4.1.7",
     "astro": "5.7.13",
     "tailwindcss": "^4.1.7",
