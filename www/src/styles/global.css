@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+  --font-brand: "Righteous";
+  --font-sans: "Atkinson Hyperlegible", "sans-serif";
+}
