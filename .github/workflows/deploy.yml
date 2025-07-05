@@ -32,7 +32,7 @@ jobs:
             ~/.cache/
           key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml', '**/eslint.config.js') }}
       - run: pnpm install
-      - run: pnpm run lint -- --cache-strategy content
+      - run: pnpm run lint --cache-strategy content
       - run: pnpm run build
         working-directory: ./www
       - name: "Deploy to Cloudflare Pages"
