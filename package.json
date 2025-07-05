@@ -16,7 +16,7 @@
     "lint": "eslint --cache --cache-location '.cache/eslint/' .",
     "lint:ls": "DEBUG=eslint:eslint pnpm run lint",
     "prepare": "husky",
-    "prettier": "prettier . --write",
+    "prettier": "prettier . --write --cache --cache-location '.cache/prettier/'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
