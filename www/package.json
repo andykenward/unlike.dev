@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "start": "astro dev",
     "svgo:icons": "svgo --config svgo-icons.config.cjs -r -f ./src/assets/icons -o ./src/assets/icons",
-    "svgo:svgs": "svgo --config svgo.config.cjs -r -f ./src/assets/svgs -o ./src/assets/svgs"
+    "svgo:svgs": "svgo --config svgo.config.cjs -r -f ./src/assets/svgs -o ./src/assets/svgs",
+    "tsc:check": "tsc --noEmit --checkJs"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
