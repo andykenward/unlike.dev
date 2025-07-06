@@ -1,5 +1,5 @@
 /*
-    Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-D0jFZ4zkWaWWQjsOVTROetjrPTsbJ8VM12qdTO591sM=' cloudflareinsights.com; connect-src 'self' cloudflareinsights.com; script-src-elem 'self' 'nonce-D0jFZ4zkWaWWQjsOVTROetjrPTsbJ8VM12qdTO591sM=' cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+    Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-D0jFZ4zkWaWWQjsOVTROetjrPTsbJ8VM12qdTO591sM=' cloudflareinsights.com static.cloudflareinsights.com; connect-src 'self' cloudflareinsights.com static.cloudflareinsights.com; script-src-elem 'self' 'nonce-D0jFZ4zkWaWWQjsOVTROetjrPTsbJ8VM12qdTO591sM=' cloudflareinsights.com static.cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
     X-Frame-Options: DENY
     X-Content-Type-Options: nosniff
     X-XSS-Protection: 1; mode=block
