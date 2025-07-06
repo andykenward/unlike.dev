@@ -12,7 +12,7 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "sed -i '/^ZSH_THEME/c\\ZSH_THEME=\"bira\"' ~/.zshrc && pnpm i",
+  "postCreateCommand": "sed -i '/^ZSH_THEME/c\\ZSH_THEME=\"bira\"' ~/.zshrc && sudo apt install xvfb xauth && pnpm i",
   "updateContentCommand": "rm -rf .cache && pnpm i",
 
   // Configure tool-specific properties.
@@ -25,7 +25,8 @@
         "esbenp.prettier-vscode",
         "github.vscode-github-actions",
         "GitHub.vscode-pull-request-github",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "ms-playwright.playwright"
       ]
     }
   }
