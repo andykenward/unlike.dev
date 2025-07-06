@@ -1,15 +1,7 @@
 /** @type {import("svgo").Config} */
 const config = {
   plugins: [
-    {
-      name: "preset-default",
-      params: {
-        overrides: {
-          removeViewBox: false,
-          removeTitle: false,
-        },
-      },
-    },
+    "preset-default",
     "prefixIds",
     "removeDimensions",
     {

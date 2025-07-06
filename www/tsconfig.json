@@ -1,6 +1,8 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "tsBuildInfoFile": "../.cache/www/.tsbuildinfo",
+    "incremental": true,
     "verbatimModuleSyntax": true
   },
   "include": [".astro/types.d.ts", "**/*"],
