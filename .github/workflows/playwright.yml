@@ -1,6 +1,13 @@
 name: Playwright Tests
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   deployment_status:
+
 permissions:
   actions: read # Only required for private GitHub Repo
   contents: read
@@ -10,7 +17,7 @@ jobs:
   playwright:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    if: ${{ github.event.deployment_status.state == 'success' }}
+    if: github.event.deployment_status.state == 'success' && (github.event.deployment_status.environment == 'production' || github.event.deployment_status.environment == 'preview')
     container:
       image: mcr.microsoft.com/playwright:v1.53.0-noble
       options: --user 1001
