@@ -12,7 +12,7 @@ test("has title", async ({ page }) => {
 });
 
 test("get email link", async ({ page }) => {
-  const linkEmail = await page
+  const linkEmail = page
     .getByRole("main")
     .getByRole("link", { name: "hi@unlike.dev" });
 
@@ -23,7 +23,7 @@ test("get email link", async ({ page }) => {
     page.getByRole("heading", { name: "Unlike", level: 1 }),
   ).toBeVisible();
 
-  const linkEmailFooter = await page
+  const linkEmailFooter = page
     .getByRole("contentinfo")
     .getByRole("link", { name: "hi@unlike.dev" });
 
