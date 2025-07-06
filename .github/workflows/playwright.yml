@@ -1,19 +1,20 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
 name: Playwright Tests
 on:
-  deployment_status:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-permissions:
-  actions: read # Only required for private GitHub Repo
-  contents: read
-  deployments: read
-  pull-requests: write
 jobs:
   playwright:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'success' && (github.event.deployment_status.environment == 'production' || github.event.deployment_status.environment == 'preview')
     container:
-      image: mcr.microsoft.com/playwright:v1.53.0-noble
+      image: mcr.microsoft.com/playwright:v1.53.2-noble
       options: --user 1001
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
@@ -25,8 +26,6 @@ jobs:
       - run: pnpm install
       - name: Run Playwright tests
         run: pnpm exec playwright test
-        env:
-          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
         if: ${{ !cancelled() }}
         with:
