@@ -24,6 +24,8 @@ jobs:
           node-version-file: "package.json"
           cache: "pnpm"
       - run: pnpm install
+      - run: pnpm run build
+        working-directory: ./www
       - name: Run Playwright tests
         run: pnpm exec playwright test
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
