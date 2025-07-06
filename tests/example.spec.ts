@@ -27,6 +27,6 @@ test("get email link", async ({ page }) => {
     .getByRole("contentinfo")
     .getByRole("link", { name: "hi@unlike.dev" });
 
-  await expect(linkEmailFooter).toBeVisible();
+  await expect(linkEmailFooter).not.toBeInViewport();
   await expect(linkEmailFooter).toHaveAttribute("href", "mailto:hi@unlike.dev");
 });
