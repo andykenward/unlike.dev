@@ -10,7 +10,7 @@ jobs:
   playwright:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'success'
+    if: ${{ github.event.deployment_status.state == 'success' }}
     container:
       image: mcr.microsoft.com/playwright:v1.53.0-noble
       options: --user 1001
