@@ -12,7 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./www/tests",
+  testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -27,6 +27,12 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:4321",
+
+    extraHTTPHeaders: {
+      "CF-Access-Client-Id": process.env.CLOUDFLARE_ACCESS_CLIENT_ID || "",
+      "CF-Access-Client-Secret":
+        process.env.CLOUDFLARE_ACCESS_CLIENT_SECRET || "",
+    },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -75,7 +81,7 @@ export default defineConfig({
     ? undefined
     : {
         command: "pnpm --filter www preview",
-        url: " http://localhost:4321/",
+        url: "http://localhost:4321/",
         timeout: 120 * 1000,
         reuseExistingServer: !process.env.CI,
       },
