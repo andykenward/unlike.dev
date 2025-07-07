@@ -28,6 +28,12 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:4321",
 
+    extraHTTPHeaders: {
+      "CF-Access-Client-Id": process.env.CLOUDFLARE_ACCESS_CLIENT_ID || "",
+      "CF-Access-Client-Secret":
+        process.env.CLOUDFLARE_ACCESS_CLIENT_SECRET || "",
+    },
+
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
