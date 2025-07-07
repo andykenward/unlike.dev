@@ -8,7 +8,15 @@
 
 version: 2
 updates:
-  - package-ecosystem: "devcontainers"
+  - package-ecosystem: devcontainers
+    assignees:
+      - "andykenward"
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "12:00"
+      timezone: "Europe/London"
+  - package-ecosystem: docker
     assignees:
       - "andykenward"
     directory: "/"
@@ -24,7 +32,7 @@ updates:
       interval: weekly
       time: "12:00"
       timezone: "Europe/London"
-  - package-ecosystem: "npm"
+  - package-ecosystem: npm
     assignees:
       - "andykenward"
     directories:
