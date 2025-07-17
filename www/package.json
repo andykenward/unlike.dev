@@ -18,7 +18,7 @@
     "@fontsource/atkinson-hyperlegible": "5.2.6",
     "@fontsource/righteous": "5.2.6",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "5.11.0",
+    "astro": "5.12.0",
     "tailwindcss": "^4.1.11",
     "typescript": "5.8.3"
   },
