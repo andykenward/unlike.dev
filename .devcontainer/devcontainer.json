@@ -27,7 +27,15 @@
         "GitHub.vscode-pull-request-github",
         "redhat.vscode-yaml",
         "ms-playwright.playwright"
-      ]
+      ],
+      "mcp": {
+        "servers": {
+          "playwright": {
+            "command": "pnpx",
+            "args": ["@playwright/mcp"]
+          }
+        }
+      }
     }
   },
   "features": {
