@@ -65,6 +65,15 @@ test("shows header", async ({ page }) => {
   );
   await expect(nameLink).toHaveAttribute("rel", "noreferrer nofollow");
   await expect(nameLink).not.toHaveAttribute("target");
+
+  await expect(
+    page.getByRole("heading", { level: 4, name: "London, England" }),
+  ).toBeVisible();
+  const email = page
+    .getByRole("main")
+    .getByRole("link", { name: "hi@unlike.dev" });
+  await expect(email).toBeVisible();
+  await expect(email).toHaveAttribute("href", "mailto:hi@unlike.dev");
 });
 
 test("homepage snapshot", async ({ page, browserName }, testInfo) => {
