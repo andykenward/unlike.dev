@@ -64,8 +64,8 @@ importers:
         specifier: 3.5.1
         version: 3.5.1
       '@fontsource/atkinson-hyperlegible':
-        specifier: 5.2.6
-        version: 5.2.6
+        specifier: 5.2.7
+        version: 5.2.7
       '@fontsource/righteous':
         specifier: 5.2.6
         version: 5.2.6
@@ -390,8 +390,8 @@ packages:
     resolution: {integrity: sha512-Z5kJ+wU3oA7MMIqVR9tyZRtjYPr4OC004Q4Rw7pgOKUOKkJfZ3O24nz3WYfGRpMDNmcOi3TwQOmgm7B7Tpii0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fontsource/atkinson-hyperlegible@5.2.6':
-    resolution: {integrity: sha512-Kfh6/UlHhotKuv4Oi9PXQIsmzwbtJIR442sSJnEHsO7TDZaDczK8cY0AlTNOB0XMDZj1j35nAlgbi2HZCdNg/Q==}
+  '@fontsource/atkinson-hyperlegible@5.2.7':
+    resolution: {integrity: sha512-WUCchUMKXKH9VO1ZStn64CMdWl+l+kJY+6Ia9lFoO5C+z7jHx3Z2y73lBnHwz3n8it5Hs2wdk0JDyhs8hPbXxw==}
 
   '@fontsource/righteous@5.2.6':
     resolution: {integrity: sha512-YH0U/+YEEsHRMqDyiQOdvzLVqU31MlJkRcD+JSHsDODogVLd+5ccxpbuRTcMRJoxFaELUy6bWP52NlR9hywvPw==}
@@ -3603,7 +3603,7 @@ snapshots:
       '@eslint/core': 0.15.2
       levn: 0.4.1
 
-  '@fontsource/atkinson-hyperlegible@5.2.6': {}
+  '@fontsource/atkinson-hyperlegible@5.2.7': {}
 
   '@fontsource/righteous@5.2.6': {}
 
