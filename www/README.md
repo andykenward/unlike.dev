@@ -10,7 +10,7 @@
 
 ## Requirements
 
-- node `^20`
+- node `^24`
 - pnpm `^8.15.1`
 
 ## 🚀 Project Structure
