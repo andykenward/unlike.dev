@@ -71,6 +71,8 @@ jobs:
           node-version-file: "package.json"
           cache: "pnpm"
       - run: pnpm install
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
       - name: Run Playwright tests
         run: pnpm exec playwright test
         env:
