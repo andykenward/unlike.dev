@@ -9,7 +9,7 @@ const SOCIAL = await getCollection("social").then((data) =>
 
 <header class="flex flex-col items-start gap-y-2">
   <h1
-    class="font-brand -indent-1.5 text-[clamp(4.5rem,4vw+4rem,16rem)] font-normal leading-none tracking-tighter"
+    class="font-brand -indent-1.5 text-[clamp(4.5rem,4vw+4rem,16rem)] leading-none font-normal tracking-tighter"
   >
     {SITE_TITLE}
   </h1>
@@ -38,14 +38,14 @@ const SOCIAL = await getCollection("social").then((data) =>
           title={title}
           href={href}
           rel="noreferrer nofollow"
-          class="group select-none text-4xl transition-[filter] duration-300 ease-linear"
+          class="group text-4xl transition-[filter] duration-300 ease-linear select-none"
         >
           <img
             alt={`${title}`}
             width={asset.width}
             height={asset.height}
             src={asset.src}
-            class="group-hover:invert-40 group-focus-visible:invert-40 dark:group-hover:invert-60 dark:group-focus-visible:invert-60 size-9 dark:invert"
+            class="size-9 group-hover:invert-40 group-focus-visible:invert-40 dark:invert dark:group-hover:invert-60 dark:group-focus-visible:invert-60"
           />
         </a>
       ))
