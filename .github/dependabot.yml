@@ -69,6 +69,10 @@ updates:
       fontsource:
         patterns:
           - "@fontsource/*"
+      koa:
+        patterns:
+          - "koa"
+          - "koa-*"
       prettier:
         patterns:
           - "prettier"
