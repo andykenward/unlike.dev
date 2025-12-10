@@ -25,9 +25,10 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    serviceWorkers: "block",
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:4321",
-
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "https://localhost:4321",
+    ignoreHTTPSErrors: true,
     extraHTTPHeaders: {
       "CF-Access-Client-Id": process.env.CLOUDFLARE_ACCESS_CLIENT_ID || "",
       "CF-Access-Client-Secret":
@@ -36,6 +37,15 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+    clientCertificates: process.env.PLAYWRIGHT_TEST_BASE_URL
+      ? undefined
+      : [
+          {
+            origin: "https://localhost:4321",
+            certPath: "localhost+6.pem",
+            keyPath: "localhost+6-key.pem",
+          },
+        ],
   },
 
   /* Configure projects for major browsers */
@@ -80,8 +90,9 @@ export default defineConfig({
   webServer: process.env.PLAYWRIGHT_TEST_BASE_URL
     ? undefined
     : {
-        command: "pnpm --filter www preview",
-        url: "http://localhost:4321/",
+        command: "npm run serve",
+        ignoreHTTPSErrors: true,
+        url: "https://localhost:4321/",
         timeout: 120 * 1000,
         reuseExistingServer: !process.env.CI,
       },
