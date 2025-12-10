@@ -10,5 +10,11 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      https: {
+        key: "../localhost+6-key.pem",
+        cert: "../localhost+6.pem",
+      },
+    },
   },
 });
