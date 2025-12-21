@@ -1,0 +1,14 @@
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  },
+  "permissions": {
+    "read-data": {
+      "read": ["../localhost+6.pem", "../localhost+6-key.pem", "../www/dist"]
+    }
+  },
+
+  "imports": {
+    "@std/http": "jsr:@std/http@^1.0.22"
+  }
+}

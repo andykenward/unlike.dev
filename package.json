@@ -18,7 +18,7 @@
     "prepare": "husky",
     "prettier": "prettier . --write --cache --cache-location '.cache/prettier/'",
     "serve": "node ./server.js --use-system-ca",
-    "pretest": "pnpm --filter www build",
+    "serve:deno": "cd ./server-test && deno run --allow-net --no-check --cached-only -P=read-data server.ts ",
     "test": "playwright test",
     "test:site": "PLAYWRIGHT_TEST_BASE_URL='https://unlike.dev' pnpm exec playwright test",
     "test:ui": "pnpm run test --ui",
