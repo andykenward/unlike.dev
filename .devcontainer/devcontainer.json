@@ -13,8 +13,16 @@
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "sed -i '/^ZSH_THEME/c\\ZSH_THEME=\"bira\"' ~/.zshrc && mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost.pem -key-file localhost-key.pem && pnpm i",
-  "updateContentCommand": "rm -rf .cache && pnpm i && pnpm exec playwright install --with-deps",
+  "postCreateCommand": {
+    "ohmyzsh": "sed -i '/^ZSH_THEME/c\\ZSH_THEME=\"bira\"' ~/.zshrc",
+    "mkcert": "mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost.pem -key-file localhost-key.pem",
+    "pnpm": "pnpm i && pnpm exec playwright install --with-deps"
+  },
+
+  "updateContentCommand": {
+    "pnpm": "rm -rf .cache && pnpm i",
+    "deno": "cd server-test && deno install --quiet"
+  },
 
   // Configure tool-specific properties.
   "customizations": {
