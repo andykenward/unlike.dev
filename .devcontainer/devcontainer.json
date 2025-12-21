@@ -3,8 +3,9 @@
 {
   "name": "Node.js & TypeScript",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bullseye",
-
+  "build": {
+    "dockerfile": "DockerFile"
+  },
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
 
@@ -26,7 +27,8 @@
         "GitHub.vscode-pull-request-github",
         "ms-playwright.playwright",
         "prettier.prettier-vscode",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "denoland.vscode-deno"
       ],
       "mcp": {
         "servers": {

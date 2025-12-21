@@ -1,0 +1,2 @@
+FROM mcr.microsoft.com/devcontainers/typescript-node:24-bullseye
+COPY --from=denoland/deno:bin-2.6.0 /deno /usr/local/bin/deno
