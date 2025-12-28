@@ -4,7 +4,7 @@ import Koa from "koa";
 import serve from "koa-static";
 
 const app = new Koa();
-
+//
 app.use(serve("www/dist", { maxage: 365 * 24 * 60 * 60 * 1000 }));
 
 const onRequestHandler = app.callback();
