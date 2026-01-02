@@ -8,6 +8,12 @@ on:
       - closed
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to run action against"
+        type: environment
+        required: false
 jobs:
   delete:
     permissions:
