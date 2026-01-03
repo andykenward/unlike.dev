@@ -18,7 +18,7 @@ on:
 jobs:
   deploy:
     permissions:
-      actions: read # Only required for private GitHub Repo
+      actions: read
       contents: read
       deployments: write
       pull-requests: write
@@ -62,6 +62,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           keep-latest: 2
   playwright:
+    permissions:
+      actions: read
     needs:
       - deploy
     timeout-minutes: 5
