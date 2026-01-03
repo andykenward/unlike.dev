@@ -17,7 +17,7 @@ on:
 jobs:
   delete:
     permissions:
-      actions: read # Only required for private GitHub Repo
+      actions: read
       contents: read
       deployments: write
       pull-requests: write
