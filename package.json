@@ -40,7 +40,7 @@
     "koa": "3.1.1",
     "koa-static": "5.0.0",
     "lint-staged": "16.2.7",
-    "prettier": "3.7.3",
+    "prettier": "3.7.4",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-packagejson": "2.5.20",
     "prettier-plugin-tailwindcss": "0.7.2"
