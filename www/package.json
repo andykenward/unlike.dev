@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.6",
-    "@astrojs/sitemap": "3.6.1",
+    "@astrojs/sitemap": "3.7.0",
     "@fontsource/atkinson-hyperlegible": "5.2.8",
     "@fontsource/righteous": "5.2.7",
     "@tailwindcss/vite": "4.1.18",
-    "astro": "5.16.9",
+    "astro": "5.17.1",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3"
   },
