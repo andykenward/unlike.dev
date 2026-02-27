@@ -32,8 +32,8 @@
         "github.vscode-github-actions",
         "GitHub.vscode-pull-request-github",
         "ms-playwright.playwright",
-        "prettier.prettier-vscode",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "esbenp.prettier-vscode"
       ],
       "mcp": {
         "servers": {
