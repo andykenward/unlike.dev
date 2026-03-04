@@ -37,7 +37,7 @@
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-playwright": "2.7.1",
     "husky": "9.1.7",
-    "koa": "3.1.1",
+    "koa": "3.1.2",
     "koa-static": "5.0.0",
     "lint-staged": "16.2.7",
     "prettier": "3.7.4",
