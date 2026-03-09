@@ -45,7 +45,7 @@ jobs:
         working-directory: ./www
       - name: "Deploy to Cloudflare Pages"
         id: deploy_cloudflare
-        uses: andykenward/github-actions-cloudflare-pages@e65e633cf2fa51d34ecd423be3a4eab0bca53ddf #v3.3.0
+        uses: andykenward/github-actions-cloudflare-pages@def80dd70ba3eb3d243520092bd303aa6454ec40 #v3.3.1
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -55,7 +55,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-environment: ${{ (github.ref == 'refs/heads/main' && 'production') || 'preview' }}
       - name: "Deploy deletion from Cloudflare Pages"
-        uses: andykenward/github-actions-cloudflare-pages/delete@e65e633cf2fa51d34ecd423be3a4eab0bca53ddf #v3.3.0
+        uses: andykenward/github-actions-cloudflare-pages/delete@def80dd70ba3eb3d243520092bd303aa6454ec40 #v3.3.1
         if: github.ref == 'refs/heads/main'
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
