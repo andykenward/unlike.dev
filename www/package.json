@@ -13,7 +13,7 @@
     "tsc:check": "tsc --noEmit --checkJs"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.7",
+    "@astrojs/check": "0.9.8",
     "@astrojs/sitemap": "3.7.1",
     "@fontsource/atkinson-hyperlegible": "5.2.8",
     "@fontsource/righteous": "5.2.7",
