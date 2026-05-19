@@ -1,0 +1,14 @@
+{
+  "features": {
+    "ghcr.io/devcontainers-extra/features/apt-packages:1": {
+      "version": "1.0.6",
+      "resolved": "ghcr.io/devcontainers-extra/features/apt-packages@sha256:55c54412112da81b9381e470cdbbe55278564950d1ff536ce925b1e8e096babd",
+      "integrity": "sha256:55c54412112da81b9381e470cdbbe55278564950d1ff536ce925b1e8e096babd"
+    },
+    "ghcr.io/devcontainers-extra/features/mkcert:1": {
+      "version": "1.0.15",
+      "resolved": "ghcr.io/devcontainers-extra/features/mkcert@sha256:e3ba1bcd9025090d2b1364d53f53c3ff7106109856fd3ff175b2b41f932a10f5",
+      "integrity": "sha256:e3ba1bcd9025090d2b1364d53f53c3ff7106109856fd3ff175b2b41f932a10f5"
+    }
+  }
+}
