@@ -45,7 +45,7 @@ jobs:
         working-directory: ./www
       - name: "Deploy to Cloudflare Pages"
         id: deploy_cloudflare
-        uses: andykenward/github-actions-cloudflare-pages@e65e633cf2fa51d34ecd423be3a4eab0bca53ddf #v3.3.0
+        uses: andykenward/github-actions-cloudflare-pages@46d86e1caa6b86365a41d335db65a6936a1beb39 #v3.5.0
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
