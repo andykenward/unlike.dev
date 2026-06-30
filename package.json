@@ -45,9 +45,20 @@
     "prettier-plugin-packagejson": "3.0.0",
     "prettier-plugin-tailwindcss": "0.7.2"
   },
-  "packageManager": "pnpm@10.12.4",
   "engines": {
-    "node": "^24.10.0",
-    "pnpm": "^10.12.4"
+    "node": "^24.14.0",
+    "pnpm": "^10.31.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^10.31.0",
+      "onFail": "error"
+    },
+    "runtime": {
+      "name": "node",
+      "onFail": "error",
+      "version": "^24.14.0"
+    }
   }
 }
