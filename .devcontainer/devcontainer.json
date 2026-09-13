@@ -1,12 +1,26 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
-  "name": "Node.js & TypeScript",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bullseye",
+  "name": "Container - Unlike",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
 
   // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
+  "features": {
+    // Node 24 matches CI (.github/actions/setup-pnpm); pnpm matches packageManager.
+    "ghcr.io/devcontainers/features/node:2.1.0": {
+      "version": "24",
+      "pnpmVersion": "10.12.4"
+    },
+    // Extensions install at image build as the remote user. The option can't
+    // pin a version, so each rebuild pulls the extension's latest release.
+    "ghcr.io/devcontainers/features/github-cli:1.1.2": {
+      "extensions": "github/gh-stack"
+    },
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0.5": {},
+    "ghcr.io/devcontainers-extra/features/mkcert:1": {}
+  },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
@@ -26,32 +40,32 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "anthropic.claude-code",
         "astro-build.astro-vscode",
         "bradlc.vscode-tailwindcss",
         "eamodio.gitlens",
+        "esbenp.prettier-vscode",
         "github.vscode-github-actions",
         "GitHub.vscode-pull-request-github",
         "ms-playwright.playwright",
-        "redhat.vscode-yaml",
-        "esbenp.prettier-vscode"
-      ],
-      "mcp": {
-        "servers": {
-          "playwright": {
-            "command": "pnpx",
-            "args": ["@playwright/mcp"]
-          }
-        }
-      }
+        "redhat.vscode-yaml"
+      ]
+      // "mcp": {
+      //   "servers": {
+      //     "playwright": {
+      //       "command": "pnpx",
+      //       "args": ["@playwright/mcp"]
+      //     }
+      //   }
+      // }
     }
   },
-  "features": {
-    "ghcr.io/devcontainers-extra/features/apt-packages:1": {
-      "packages": "xvfb,xauth,libnss3-tools"
-    },
-    "ghcr.io/devcontainers-extra/features/mkcert:1": {}
-  }
+  "mounts": [
+    "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume",
+    "source=gh-config-${devcontainerId},target=/home/vscode/.config/gh,type=volume",
+    "source=zsh-history-${devcontainerId},target=/home/vscode/.commandhistory,type=volume"
+  ],
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
+  "remoteUser": "vscode"
 }
