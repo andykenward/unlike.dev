@@ -5,7 +5,8 @@ set -euo pipefail
 # right place — .claude/CLAUDE.md (session-wide conventions), .claude/rules/*.md
 # (path-scoped conventions) and auto-memory (MEMORY.md + memory files, for user
 # preferences and project context).
-# Only triggers when tracked files have uncommitted changes — skips read-only sessions.
+# Only triggers when there are uncommitted changes (including new untracked files) —
+# skips read-only sessions.
 #
 # Used by:
 # - .claude/settings.json (Stop hook)
@@ -22,7 +23,8 @@ if ! command -v git >/dev/null 2>&1; then
 fi
 
 # Skip if no working-tree changes (read-only session or everything already committed).
-if git diff --quiet 2>/dev/null && git diff --cached --quiet 2>/dev/null; then
+# `git status --porcelain` also lists untracked files (respecting .gitignore).
+if [ -z "$(git status --porcelain 2>/dev/null)" ]; then
   exit 0
 fi
 
