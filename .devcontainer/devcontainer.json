@@ -18,7 +18,6 @@
     "ghcr.io/devcontainers/features/github-cli:1.1.2": {
       "extensions": "github/gh-stack"
     },
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0.5": {},
     "ghcr.io/devcontainers-extra/features/mkcert:1": {}
   },
 
@@ -28,6 +27,8 @@
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": {
     "ohmyzsh": "sed -i '/^ZSH_THEME/c\\ZSH_THEME=\"bira\"' ~/.zshrc",
+    // Native installer (~/.local/bin) so Claude Code can auto-update without sudo.
+    "claude": "curl -fsSL https://claude.ai/install.sh | bash",
     "mkcert": "mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost.pem -key-file localhost-key.pem",
     "pnpm": "pnpm i && pnpm exec playwright install --with-deps"
   },

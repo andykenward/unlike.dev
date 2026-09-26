@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 
 const TAGS = await getCollection("tags").then((data) =>
-  data.filter((item) => !item.id.startsWith("legacy/")),
+  data
+    .filter((item) => !item.id.startsWith("legacy/"))
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder),
 );
 
 const TAGS_CMS = TAGS.filter((item) => item.id.startsWith("cms/"));
@@ -36,20 +38,18 @@ const ORDERED_TAGS = [
     aria-labelledby="skills"
     class="mx-auto flex flex-wrap text-lg [&>li]:inline-flex [&>li]:after:mx-2 [&>li]:after:content-['•'] [&>li:last-child]:after:hidden"
   >
-    {
-      ORDERED_TAGS.map((tags) =>
-        tags.map(({ data }) => (
-          <li>
-            <a
-              class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
-              href={data.href}
-              rel="noreferrer nofollow"
-            >
-              {data.title}
-            </a>
-          </li>
-        )),
-      )
-    }
+    {ORDERED_TAGS.map((tags) =>
+      tags.map(({ data }) => (
+        <li>
+          <a
+            class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
+            href={data.href}
+            rel="noreferrer nofollow"
+          >
+            {data.title}
+          </a>
+        </li>
+      )),
+    )}
   </ul>
 </section>

@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const clients = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/clients" }),
@@ -7,7 +8,7 @@ const clients = defineCollection({
     z.object({
       sortOrder: z.number(),
       asset: image(),
-      href: z.string().url(),
+      href: z.url(),
       title: z.string(),
     }),
 });
@@ -18,7 +19,7 @@ const social = defineCollection({
     z.object({
       sortOrder: z.number(),
       asset: image(),
-      href: z.string().url(),
+      href: z.url(),
       title: z.string(),
     }),
 });
@@ -26,8 +27,9 @@ const social = defineCollection({
 const tags = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/tags" }),
   schema: z.object({
+    sortOrder: z.number(),
     title: z.string(),
-    href: z.string().url(),
+    href: z.url(),
   }),
 });
 
@@ -37,7 +39,7 @@ const openSource = defineCollection({
     z.object({
       title: z.string(),
       asset: image(),
-      href: z.string().url(),
+      href: z.url(),
     }),
 });
 

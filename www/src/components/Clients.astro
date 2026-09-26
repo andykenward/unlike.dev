@@ -14,30 +14,28 @@ const CLIENTS = await getCollection("clients").then((data) =>
     aria-labelledby="experience"
     class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3"
   >
-    {
-      CLIENTS.map(({ data: { href, title, asset } }) => (
-        <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">
-          <a
-            href={href}
-            aria-label={title}
-            title={title}
-            rel="noreferrer nofollow"
-            class="group size-full bg-transparent transition-[background,filter] duration-300 ease-linear select-none hover:bg-black focus-visible:bg-black dark:bg-transparent dark:hover:bg-white dark:focus-visible:bg-white"
-          >
-            <img
-              loading="lazy"
-              alt={`${title} Logo`}
-              width={asset.width}
-              height={asset.height}
-              src={asset.src}
-              class="size-full group-hover:invert group-focus-visible:invert dark:invert dark:group-hover:invert-0 dark:group-focus-visible:invert-0"
-            />
-            <span aria-hidden="true" class="sr-only">
-              {title}
-            </span>
-          </a>
-        </li>
-      ))
-    }
+    {CLIENTS.map(({ data: { href, title, asset } }) => (
+      <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">
+        <a
+          href={href}
+          aria-label={title}
+          title={title}
+          rel="noreferrer nofollow"
+          class="group size-full bg-transparent transition-[background,filter] duration-300 ease-linear select-none hover:bg-black focus-visible:bg-black dark:bg-transparent dark:hover:bg-white dark:focus-visible:bg-white"
+        >
+          <img
+            loading="lazy"
+            alt={`${title} Logo`}
+            width={asset.width}
+            height={asset.height}
+            src={asset.src}
+            class="size-full group-hover:invert group-focus-visible:invert dark:invert dark:group-hover:invert-0 dark:group-focus-visible:invert-0"
+          />
+          <span aria-hidden="true" class="sr-only">
+            {title}
+          </span>
+        </a>
+      </li>
+    ))}
   </ul>
 </section>

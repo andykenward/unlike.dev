@@ -8,47 +8,46 @@ const SOCIAL = await getCollection("social").then((data) =>
 ---
 
 <header class="flex flex-col items-start gap-y-2">
-  <h1
-    class="font-brand -indent-1.5 text-[clamp(4.5rem,4vw+4rem,16rem)] leading-none font-normal tracking-tighter"
-  >
+  <h1 class="font-brand -indent-1.5 text-[clamp(4.5rem,4vw+4rem,16rem)] leading-none font-normal tracking-tighter">
     {SITE_TITLE}
   </h1>
   <div>
-    <h2 class="text-lg [text-wrap:balance] sm:text-2xl">
-      {SITE_DESCRIPTION}
-    </h2>
+    <h2 class="text-lg [text-wrap:balance] sm:text-2xl">{SITE_DESCRIPTION}</h2>
     <h3 class="text-lg [text-wrap:balance] sm:text-2xl">
-      By <a
+      By{" "}
+      <a
         class="underline decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-transparent focus-visible:decoration-transparent"
         rel="noreferrer nofollow"
-        href="https://www.linkedin.com/in/andykenward/">Andy Kenward</a
+        href="https://www.linkedin.com/in/andykenward/"
       >
+        Andy Kenward
+      </a>
     </h3>
     <h4 class="text-lg [text-wrap:balance] sm:text-2xl">London, England</h4>
   </div>
   <a
     class="text-xl underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current"
-    href=`mailto:${EMAIL}`>{EMAIL}</a
+    href=`mailto:${EMAIL}`
   >
+    {EMAIL}
+  </a>
   <div class="flex gap-2">
-    {
-      SOCIAL.map(({ data: { title, href, asset } }) => (
-        <a
-          aria-label={title}
-          title={title}
-          href={href}
-          rel="noreferrer nofollow"
-          class="group text-4xl transition-[filter] duration-300 ease-linear select-none"
-        >
-          <img
-            alt={`${title}`}
-            width={asset.width}
-            height={asset.height}
-            src={asset.src}
-            class="size-9 group-hover:invert-40 group-focus-visible:invert-40 dark:invert dark:group-hover:invert-60 dark:group-focus-visible:invert-60"
-          />
-        </a>
-      ))
-    }
+    {SOCIAL.map(({ data: { title, href, asset } }) => (
+      <a
+        aria-label={title}
+        title={title}
+        href={href}
+        rel="noreferrer nofollow"
+        class="group text-4xl transition-[filter] duration-300 ease-linear select-none"
+      >
+        <img
+          alt={`${title}`}
+          width={asset.width}
+          height={asset.height}
+          src={asset.src}
+          class="size-9 group-hover:invert-40 group-focus-visible:invert-40 dark:invert dark:group-hover:invert-60 dark:group-focus-visible:invert-60"
+        />
+      </a>
+    ))}
   </div>
 </header>
