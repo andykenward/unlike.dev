@@ -13,6 +13,12 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests",
+  /* e.g. tests/screenshots/homepage-chromium.png */
+  snapshotPathTemplate: "{testDir}/screenshots/{arg}-{projectName}{ext}",
+  /* Baselines are rendered in the CI Playwright container, where font rendering
+   * differs from local machines. Regenerate them with the Deploy workflow's
+   * "update-snapshots" input. */
+  ignoreSnapshots: !process.env.CI,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */

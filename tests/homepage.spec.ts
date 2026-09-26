@@ -76,7 +76,7 @@ test("shows header", async ({ page }) => {
   await expect(email).toHaveAttribute("href", "mailto:hi@unlike.dev");
 });
 
-test("homepage snapshot", async ({ page, browserName }, testInfo) => {
+test("homepage snapshot", async ({ page }) => {
   const link = page.getByRole("link", {
     name: "GitHub Action Cloudflare Pages",
   });
@@ -88,13 +88,5 @@ test("homepage snapshot", async ({ page, browserName }, testInfo) => {
 
   await expect(img).toHaveJSProperty("complete", true);
 
-  const screenshot = await page.screenshot({
-    fullPage: true,
-    path: `tests/screenshots/homepage-${browserName}.png`,
-  });
-
-  await testInfo.attach("homepage-screenshot", {
-    body: screenshot,
-    contentType: "image/png",
-  });
+  await expect(page).toHaveScreenshot("homepage.png", { fullPage: true });
 });
