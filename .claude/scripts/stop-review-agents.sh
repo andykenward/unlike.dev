@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Stop hook: prompts the agent to capture any learnings from this session in the
-# right place — .claude/CLAUDE.md (session-wide conventions), .claude/rules/*.md
+# right place — AGENTS.md (session-wide conventions), .claude/rules/*.md
 # (path-scoped conventions) and auto-memory (MEMORY.md + memory files, for user
 # preferences and project context).
 # Only triggers when there are uncommitted changes (including new untracked files) —
@@ -32,7 +32,7 @@ fi
 cat <<'EOF'
 {
   "decision": "block",
-  "reason": "Before finishing: capture any learnings from this session in the right place.\n\n1. .claude/CLAUDE.md — team-shared rules that apply in every session (keep it under 200 lines).\n2. .claude/rules/*.md — team-shared conventions, patterns and gotchas for one part of the codebase; put each in the rule whose paths cover it (add a rule, and a row in CLAUDE.md's rules table, if none fits).\n3. Auto-memory (MEMORY.md + memory files) — user preferences, feedback on how to work, and project context not derivable from the code.\n\nFor each: add what's new, fix what's stale, and skip what the repo already records. If all are already up to date, output a brief confirmation and the session can end."
+  "reason": "Before finishing: capture any learnings from this session in the right place.\n\n1. AGENTS.md — team-shared rules that apply in every session (keep it under 200 lines).\n2. .claude/rules/*.md — team-shared conventions, patterns and gotchas for one part of the codebase; put each in the rule whose paths cover it (add a rule, and a row in AGENTS.md's rules table, if none fits).\n3. Auto-memory (MEMORY.md + memory files) — user preferences, feedback on how to work, and project context not derivable from the code.\n\nFor each: add what's new, fix what's stale, and skip what the repo already records. If all are already up to date, output a brief confirmation and the session can end."
 }
 EOF
 
