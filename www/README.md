@@ -1,55 +1,47 @@
-# Unlike Ltd website
+# www
 
-[unlike.dev](https://unlike.dev)
+The Astro site for [unlike.dev](https://unlike.dev). Setup, testing and deployment are covered in the [root README](../README.md).
 
-### Built with
-
-- [Astro](https://astro.build/)
-- [TypeScript](https://www.typescriptlang.org)
-- [TailwindCSS](https://tailwindcss.com)
-
-## Requirements
-
-- node `^24`
-- pnpm `^8.15.1`
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+www/
+├── public/            # Static files; _headers sets security headers (CSP) on Cloudflare Pages
+└── src/
+    ├── assets/        # Icons and logo SVGs, referenced from content frontmatter
+    ├── components/    # One component per content collection
+    ├── content/       # Markdown entries for each collection
+    ├── layouts/
+    ├── pages/         # index, 404 and robots.txt
+    ├── styles/        # global.css with Tailwind @theme tokens
+    ├── config.ts      # Site title, description and email
+    └── content.config.ts  # Collection schemas
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Run from `www/`, or from the root with `pnpm --filter www <command>`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Command               | Action                                            |
+| :-------------------- | :------------------------------------------------ |
+| `pnpm run dev`        | Start the dev server on https://localhost:4321    |
+| `pnpm run build`      | Type-check (`astro check`) and build to `dist/`   |
+| `pnpm run preview`    | Preview the build on https://localhost:4321       |
+| `pnpm run tsc:check`  | Type-check TypeScript and JavaScript with `tsc`   |
+| `pnpm run svgo:icons` | Optimise the SVGs in `src/assets/icons/` in place |
+| `pnpm run svgo:svgs`  | Optimise the SVGs in `src/assets/svgs/` in place  |
 
-## 🧞 Commands
+## Adding content
 
-All commands are run from the root of the project, from a terminal:
+Add a Markdown file to the matching folder in `src/content/`. It has frontmatter only, and the fields must satisfy the schema in `content.config.ts`. For example, a client:
 
-| Command                 | Action                                           |
-| :---------------------- | :----------------------------------------------- |
-| `pnpm install`          | Installs dependencies                            |
-| `pnpm run dev`          | Starts local dev server at `localhost:3000`      |
-| `pnpm run build`        | Build your production site to `./dist/`          |
-| `pnpm run preview`      | Preview your build locally, before deploying     |
-| `pnpm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `pnpm run astro --help` | Get help using the Astro CLI                     |
+```md
+---
+sortOrder: 10
+asset: "../../assets/svgs/logos/client-name.svg"
+href: "https://example.com/"
+title: "Client Name"
+---
+```
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Tags under `src/content/tags/legacy/` are kept but not shown on the site.
