@@ -13,13 +13,13 @@
     "tsc:check": "tsc --noEmit --checkJs"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.9",
-    "@astrojs/sitemap": "3.7.3",
+    "@astrojs/check": "0.9.10",
+    "@astrojs/sitemap": "3.7.4",
     "@fontsource/atkinson-hyperlegible": "5.2.8",
     "@fontsource/righteous": "5.2.7",
-    "@tailwindcss/vite": "4.2.1",
-    "astro": "5.18.2",
-    "tailwindcss": "4.2.1",
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.3.5",
+    "tailwindcss": "4.3.3",
     "typescript": "5.9.3"
   },
   "devDependencies": {
