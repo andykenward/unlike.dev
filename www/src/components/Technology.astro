@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 
 const TAGS = await getCollection("tags").then((data) =>
-  data.filter((item) => !item.id.startsWith("legacy/")),
+  data
+    .filter((item) => !item.id.startsWith("legacy/"))
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder),
 );
 
 const TAGS_CMS = TAGS.filter((item) => item.id.startsWith("cms/"));

@@ -27,6 +27,7 @@ const social = defineCollection({
 const tags = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/tags" }),
   schema: z.object({
+    sortOrder: z.number(),
     title: z.string(),
     href: z.url(),
   }),
