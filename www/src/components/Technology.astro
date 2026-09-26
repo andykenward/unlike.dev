@@ -38,20 +38,18 @@ const ORDERED_TAGS = [
     aria-labelledby="skills"
     class="mx-auto flex flex-wrap text-lg [&>li]:inline-flex [&>li]:after:mx-2 [&>li]:after:content-['•'] [&>li:last-child]:after:hidden"
   >
-    {
-      ORDERED_TAGS.map((tags) =>
-        tags.map(({ data }) => (
-          <li>
-            <a
-              class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
-              href={data.href}
-              rel="noreferrer nofollow"
-            >
-              {data.title}
-            </a>
-          </li>
-        )),
-      )
-    }
+    {ORDERED_TAGS.map((tags) =>
+      tags.map(({ data }) => (
+        <li>
+          <a
+            class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
+            href={data.href}
+            rel="noreferrer nofollow"
+          >
+            {data.title}
+          </a>
+        </li>
+      )),
+    )}
   </ul>
 </section>
