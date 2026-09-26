@@ -117,18 +117,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
         with:
           name: playwright-snapshots
           path: tests/screenshots/
+      # Commit through the GraphQL API rather than git push so GitHub signs it.
       - name: Commit updated screenshot baselines
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git add tests/screenshots/
-          if git diff --cached --quiet; then
+          files=$(git diff --cached --name-only)
+          if [ -z "$files" ]; then
             echo "Screenshot baselines unchanged."
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "test: update Playwright screenshot baselines"
-          git push
+          for f in $files; do
+            base64 -w0 "$f" | jq -Rc --arg path "$f" '{path: $path, contents: .}'
+          done > "$RUNNER_TEMP/additions.jsonl"
+          jq -n \
+            --arg repo "$GITHUB_REPOSITORY" \
+            --arg branch "$GITHUB_REF_NAME" \
+            --arg oid "$(git rev-parse HEAD)" \
+            --slurpfile additions "$RUNNER_TEMP/additions.jsonl" \
+            '{
+              query: "mutation($input: CreateCommitOnBranchInput!) { createCommitOnBranch(input: $input) { commit { url } } }",
+              variables: {input: {
+                branch: {repositoryNameWithOwner: $repo, branchName: $branch},
+                expectedHeadOid: $oid,
+                message: {headline: "test: update Playwright screenshot baselines"},
+                fileChanges: {additions: $additions}
+              }}
+            }' > "$RUNNER_TEMP/request.json"
+          gh api graphql --input "$RUNNER_TEMP/request.json" --jq .data.createCommitOnBranch.commit.url
