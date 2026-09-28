@@ -15,7 +15,7 @@
     },
     // Extensions install at image build as the remote user. The option can't
     // pin a version, so each rebuild pulls the extension's latest release.
-    "ghcr.io/devcontainers/features/github-cli:1.1.2": {
+    "ghcr.io/devcontainers/features/github-cli:1.1.3": {
       "extensions": "github/gh-stack"
     },
     "ghcr.io/devcontainers-extra/features/mkcert:1": {}
