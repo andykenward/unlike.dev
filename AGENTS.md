@@ -49,6 +49,7 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 - [prek](https://prek.j178.dev) Git hooks are defined in `prek.toml`. Pre-commit: guards (no commits on `main`, merge markers, large files, private keys), svgo on staged SVGs, Prettier (sorts imports), ESLint, actionlint and zizmor (`.github/zizmor.yml`). Commit-msg: commitlint. Pre-push: `astro check`. If a hook rewrites a file the commit aborts, so re-stage and commit again.
 - `prek` is a dev dependency (`@j178/prek`); `pnpm i` installs the Git shims via `prepare` (skipped on CI). Remote hooks are pinned to commit SHAs with a `# frozen: vX.Y.Z` comment (`prek auto-update --freeze`).
 - Dependencies: `pnpm-workspace.yaml` sets `minimumReleaseAge: 1440`, so packages published in the last 24h won't install. Only `esbuild` and `sharp` may run build scripts.
+- ESLint a11y rules (`astro/jsx-a11y/*`) need `eslint-plugin-jsx-a11y-x`, the ESLint 10-compatible fork of `eslint-plugin-jsx-a11y`. `eslint-plugin-astro` loads it implicitly, so it is never imported in `eslint.config.js`; don't remove it as unused.
 - GitHub Actions are pinned to commit SHAs with a `#vX.Y.Z` comment; keep that format when bumping.
 
 ## Rules
