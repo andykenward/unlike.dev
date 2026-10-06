@@ -14,4 +14,6 @@ const serverOptions = {
 };
 
 const server = http2.createSecureServer(serverOptions, onRequestHandler);
-server.listen(4321);
+server.listen(4321, () => {
+  console.log("Listening on https://localhost:4321");
+});

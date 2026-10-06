@@ -140,5 +140,9 @@ dist
 /blob-report/
 /playwright/.cache/
 
+# Lighthouse CI
+/.lighthouseci/
+/lighthouse-report/
+
 # mkcert certificates
 *.pem

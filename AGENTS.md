@@ -16,6 +16,8 @@ pnpm run lint             # ESLint (whole repo, cached)
 pnpm run prettier         # format everything
 pnpm test                 # builds www (pretest), serves it, runs Playwright
 pnpm run test:site        # Playwright against production
+pnpm run lighthouse       # builds www, serves it, runs Lighthouse CI (3 runs)
+pnpm run lighthouse:site  # Lighthouse CI against production
 
 # Single test (build www first; the webServer only serves www/dist)
 pnpm exec playwright test -g "has title" --project=chromium
@@ -34,6 +36,12 @@ Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the 
 ## CI and screenshot baselines
 
 `.github/workflows/deploy.yml` runs the pre-commit hooks (`prek run --all-files`), builds, deploys to Cloudflare Pages (preview on PRs, production on `main`), then runs Playwright against the deployed URL in the `mcr.microsoft.com/playwright` container matching the installed `@playwright/test` version. `delete.yml` removes preview deployments when a PR closes.
+
+Lighthouse (`lighthouserc.cjs`) is local-only, using Playwright's Chromium (no separate Chrome install); it fails below the category scores asserted there and writes HTML reports to `lighthouse-report/`. It was deliberately left out of CI (Oct 2026): every `*.pages.dev` deployment sits behind Cloudflare Access, and Lighthouse both copies the Access headers into its reports and sends them to third-party origins. Gotchas when reading results:
+
+- On `unlike.dev` itself Cloudflare injects scripts that are not in this repo (`/cdn-cgi/challenge-platform/...` bot detection, `email-decode.min.js`). They lower Lighthouse best practices to about 82, so `pnpm run lighthouse:site` fails the 90 threshold; changing that is a Cloudflare dashboard setting, not a code fix.
+- The local server (`server.js`) does not compress responses, so ignore "Enable text compression" in local reports.
+- Playwright sends the Access headers on every request, third parties included, so on CI the Cloudflare Web Analytics beacon fails its CORS preflight and logs a console error. That is an artefact of the test setup, not a site bug.
 
 Screenshot comparisons only run on CI (`ignoreSnapshots: !process.env.CI`), because font rendering differs locally. Never regenerate baselines locally. To update them, push the branch and run:
 

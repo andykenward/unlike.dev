@@ -13,6 +13,9 @@
   "author": "@andykenward",
   "type": "module",
   "scripts": {
+    "prelighthouse": "pnpm --filter www build",
+    "lighthouse": "lhci autorun",
+    "lighthouse:site": "LIGHTHOUSE_BASE_URL='https://unlike.dev' pnpm exec lhci autorun",
     "lint": "eslint --cache --cache-location '.cache/eslint/' .",
     "lint:ls": "DEBUG=eslint:eslint pnpm run lint",
     "prepare": "[ -n \"$CI\" ] || prek install",
@@ -32,6 +35,7 @@
     "@commitlint/config-conventional": "21.2.3",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
     "@j178/prek": "0.5.5",
+    "@lhci/cli": "0.15.1",
     "@playwright/test": "1.63.0",
     "@types/node": "24.12.0",
     "@typescript-eslint/parser": "8.71.0",
