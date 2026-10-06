@@ -382,17 +382,14 @@ for (const { name, width } of BREAKPOINTS) {
     test.use({ viewport: { width, height: 720 } });
 
     for (const colorScheme of ["light", "dark"] as const) {
-      test(`viewport snapshot in ${colorScheme} mode`, async ({ page }) => {
+      test(`homepage snapshot in ${colorScheme} mode`, async ({ page }) => {
         await page.emulateMedia({ colorScheme });
         await loadAllImages(page);
-        // Capture what the browser window shows at this width, from the top.
-        await page.evaluate(() => window.scrollTo(0, 0));
-        await expect(
-          page.getByRole("heading", { name: "Unlike", level: 1 }),
-        ).toBeInViewport();
 
+        // The full page height, at this viewport width.
         await expect(page).toHaveScreenshot(
           `homepage-${name}-${colorScheme}.png`,
+          { fullPage: true },
         );
       });
     }
