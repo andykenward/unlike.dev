@@ -21,6 +21,7 @@ pnpm run lighthouse       # builds www, serves it, runs Lighthouse CI (3 runs)
 pnpm run lighthouse:site  # Lighthouse CI against production
 
 # Single test (build www first; the webServer only serves www/dist via serve:pages)
+# Use `pnpm exec playwright test`, not `pnpm test -- <args>`: the latter ignored the file filter and --repeat-each and ran the whole suite
 pnpm exec playwright test -g "has title" --project=chromium
 ```
 
@@ -67,6 +68,7 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 
 Path-scoped conventions live in `.claude/rules/*.md`.
 
-| Rule                                | Paths                                          | Covers                                                                                                        |
-| ----------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [headers](.claude/rules/headers.md) | `www/public/_headers`, `tests/headers.spec.ts` | CSP nonce and Cloudflare-injected scripts, zone-level header overrides, testing with the local Pages emulator |
+| Rule                                      | Paths                                          | Covers                                                                                                        |
+| ----------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [headers](.claude/rules/headers.md)       | `www/public/_headers`, `tests/headers.spec.ts` | CSP nonce and Cloudflare-injected scripts, zone-level header overrides, testing with the local Pages emulator |
+| [playwright](.claude/rules/playwright.md) | `tests/**/*.spec.ts`, `playwright.config.ts`   | Screenshot baselines and names, lazy images, dark mode, locator and listener gotchas                          |
