@@ -58,7 +58,17 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        /* Reduce font rasterisation differences between machines. */
+        launchOptions: {
+          args: [
+            "--font-render-hinting=none",
+            "--disable-lcd-text",
+            "--disable-font-subpixel-positioning",
+          ],
+        },
+      },
     },
 
     {

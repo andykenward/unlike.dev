@@ -2,5 +2,5 @@
 
 @theme {
   --font-brand: "Righteous";
-  --font-sans: "Atkinson Hyperlegible", "sans-serif";
+  --font-sans: "Atkinson Hyperlegible", sans-serif;
 }
