@@ -21,6 +21,7 @@ pnpm run lighthouse       # builds www, serves it, runs Lighthouse CI (3 runs)
 pnpm run lighthouse:site  # Lighthouse CI against production
 
 # Single test (build www first; the webServer only serves www/dist via serve:pages)
+# Use `pnpm exec playwright test`, not `pnpm test -- <args>`: the latter ignored the file filter and --repeat-each and ran the whole suite
 pnpm exec playwright test -g "has title" --project=chromium
 ```
 
@@ -36,7 +37,7 @@ Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the 
 
 ## CI and screenshot baselines
 
-`.github/workflows/deploy.yml` runs the pre-commit hooks (`prek run --all-files`), builds, deploys to Cloudflare Pages (preview on PRs, production on `main`), then runs Playwright against the deployed URL in the `mcr.microsoft.com/playwright` container matching the installed `@playwright/test` version. `delete.yml` removes preview deployments when a PR closes.
+`.github/workflows/deploy.yml` runs the pre-commit hooks (`prek run --all-files`), builds, deploys to Cloudflare Pages (preview on PRs, production on `main`), then runs Playwright against the deployed URL in the `mcr.microsoft.com/playwright` container matching the installed `@playwright/test` version. `delete.yml` removes preview deployments when a PR closes. The workflow only triggers for PRs whose base is `main`, so a stacked PR must also target `main` (its diff then includes the parent branch's commits) or it gets no preview and no Playwright run. PRs are squash-merged, so once the parent merges the stacked PR conflicts with `main`; merge `main` back in (or rebase onto it, dropping the parent's commits) before continuing.
 
 Lighthouse (`lighthouserc.cjs`) is local-only, using Playwright's Chromium (no separate Chrome install); it fails below the category scores asserted there and writes HTML reports to `lighthouse-report/`. It was deliberately left out of CI (Oct 2026): every `*.pages.dev` deployment sits behind Cloudflare Access, and Lighthouse both copies the Access headers into its reports and sends them to third-party origins. Gotchas when reading results:
 
@@ -67,6 +68,7 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 
 Path-scoped conventions live in `.claude/rules/*.md`.
 
-| Rule                                | Paths                                          | Covers                                                                                                        |
-| ----------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [headers](.claude/rules/headers.md) | `www/public/_headers`, `tests/headers.spec.ts` | CSP nonce and Cloudflare-injected scripts, zone-level header overrides, testing with the local Pages emulator |
+| Rule                                      | Paths                                          | Covers                                                                                                        |
+| ----------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [headers](.claude/rules/headers.md)       | `www/public/_headers`, `tests/headers.spec.ts` | CSP nonce and Cloudflare-injected scripts, zone-level header overrides, testing with the local Pages emulator |
+| [playwright](.claude/rules/playwright.md) | `tests/**/*.spec.ts`, `playwright.config.ts`   | Screenshot baselines and names, lazy images, dark mode, locator and listener gotchas                          |
