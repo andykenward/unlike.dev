@@ -300,7 +300,16 @@ test("loads without script errors or failed same-origin requests", async ({
   tab.on("pageerror", (error) => {
     // The analytics beacon is refused away from unlike.dev, and WebKit
     // reports that CORS failure as a page error.
-    if (!error.message.includes("cloudflareinsights.com")) {
+    // WebKit's message is "/cloudflareinsights.com/cdn-cgi/rum due to …".
+    const target = error.message
+      .split(/\s+/)
+      .find((part) => part.includes("/"))
+      ?.replace(/^(https?:)?\/+/, "");
+    const host =
+      target && URL.canParse(`https://${target}`)
+        ? new URL(`https://${target}`).hostname
+        : undefined;
+    if (host !== "cloudflareinsights.com") {
       problems.push(`pageerror: ${error.message}`);
     }
   });
