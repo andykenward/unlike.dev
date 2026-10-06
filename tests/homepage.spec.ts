@@ -76,6 +76,35 @@ test("shows header", async ({ page }) => {
   await expect(email).toHaveAttribute("href", "mailto:hi@unlike.dev");
 });
 
+test("preconnects to the analytics origin", async ({ page }) => {
+  const preconnect = page.locator(
+    'head link[rel="preconnect"][href="https://static.cloudflareinsights.com"]',
+  );
+
+  await expect(preconnect).toHaveCount(1);
+  // Must match the beacon script's CORS mode or the connection is not reused.
+  await expect(preconnect).toHaveAttribute("crossorigin", "anonymous");
+  await expect(
+    page.locator('script[src^="https://static.cloudflareinsights.com/"]'),
+  ).toHaveAttribute("crossorigin", "anonymous");
+});
+
+test("prioritises the first row of client logos", async ({ page }) => {
+  const logos = page
+    .getByRole("list", { name: "Experience:" })
+    .getByRole("img");
+
+  // The first logo is the Largest Contentful Paint element.
+  await expect(logos.first()).toHaveAttribute("fetchpriority", "high");
+  await expect(page.locator('img[fetchpriority="high"]')).toHaveCount(1);
+
+  for (const index of [0, 1, 2]) {
+    await expect(logos.nth(index)).toHaveAttribute("loading", "eager");
+  }
+  await expect(logos.nth(3)).toHaveAttribute("loading", "lazy");
+  await expect(logos.last()).toHaveAttribute("loading", "lazy");
+});
+
 test("homepage snapshot", async ({ page }) => {
   const link = page.getByRole("link", {
     name: "GitHub Action Cloudflare Pages",
