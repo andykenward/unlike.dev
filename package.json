@@ -25,7 +25,7 @@
     "test:ui:container": "xvfb-run pnpm run test:ui --ui-host=0.0.0.0 --ui-port=8080"
   },
   "dependencies": {
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "21.2.3",
