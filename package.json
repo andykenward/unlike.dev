@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "eslint --cache --cache-location '.cache/eslint/' .",
     "lint:ls": "DEBUG=eslint:eslint pnpm run lint",
-    "prepare": "husky",
+    "prepare": "[ -n \"$CI\" ] || prek install",
     "prettier": "prettier . --write --cache --cache-location '.cache/prettier/'",
     "serve": "node ./server.js --use-system-ca",
     "pretest": "pnpm --filter www build",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
+    "@j178/prek": "0.5.5",
     "@playwright/test": "1.63.0",
     "@types/node": "24.12.0",
     "@typescript-eslint/parser": "8.71.0",
@@ -36,10 +37,8 @@
     "eslint-plugin-astro": "3.2.1",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-playwright": "2.12.0",
-    "husky": "9.1.7",
     "koa": "3.2.1",
     "koa-static": "5.0.0",
-    "lint-staged": "16.4.0",
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0",
     "prettier-plugin-packagejson": "3.0.2",

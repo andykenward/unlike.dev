@@ -46,7 +46,7 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 ## Conventions
 
 - Conventional Commits: `feat:`, `fix:`, `chore(deps):`, `test:`, `ci:`.
-- Husky pre-commit runs Prettier on staged files via lint-staged. Prettier sorts imports.
+- [prek](https://prek.j178.dev) pre-commit hook (`prek.toml`) runs Prettier on staged files. Prettier sorts imports. `prek` is a dev dependency (`@j178/prek`) and `pnpm i` installs the Git shim via `prepare` (skipped on CI); if the hook reformats a file the commit aborts, so re-stage and commit again.
 - Dependencies: `pnpm-workspace.yaml` sets `minimumReleaseAge: 1440`, so packages published in the last 24h won't install. Only `esbuild` and `sharp` may run build scripts.
 - GitHub Actions are pinned to commit SHAs with a `#vX.Y.Z` comment; keep that format when bumping.
 

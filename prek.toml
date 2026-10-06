@@ -1,0 +1,8 @@
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "prettier"
+name = "prettier"
+language = "system"
+entry = "pnpm exec prettier --write --ignore-unknown"
