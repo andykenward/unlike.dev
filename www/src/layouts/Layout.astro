@@ -13,8 +13,7 @@ interface Props {
 const { title, description, image = "/hotlink-ok/social.jpg" } = Astro.props;
 
 const TITLE:
-  | `${string} | ${typeof META_SITE_TITLE}`
-  | `${typeof META_SITE_TITLE}` = title
+  `${string} | ${typeof META_SITE_TITLE}` | `${typeof META_SITE_TITLE}` = title
   ? `${title} | ${META_SITE_TITLE}`
   : `${META_SITE_TITLE}`;
 
