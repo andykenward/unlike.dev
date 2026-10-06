@@ -15,4 +15,6 @@ paths:
 - The CSP nonce is static, so it adds no protection of its own, but keep it: Cloudflare's bot-detection (`/cdn-cgi/challenge-platform/...`) reuses the nonce from the header for the inline script it injects. It must match the `nonce` in `www/src/layouts/Layout.astro`.
 - Do not add `'strict-dynamic'` to `script-src`: Cloudflare injects `/cdn-cgi/scripts/.../email-decode.min.js` without a nonce and it would be blocked. It only becomes possible if email obfuscation is turned off in Cloudflare.
 - The analytics script loads from `static.cloudflareinsights.com` and reports to `cloudflareinsights.com`; `script-src` and `connect-src` list those separately.
+- Rules from every matching block are combined, so a header set in two of them is sent twice: on `*.pages.dev`, `/_astro/*` responses carry `X-Robots-Tag: none, none`. The emulator only matches the path rule, so this shows up on CI but not locally.
+- `*.pages.dev` previews serve the file's `X-Frame-Options` and `Referrer-Policy` unmodified (confirmed by CI on PR #360); only the `unlike.dev` zone overrides them.
 - A `! Header` line detaches a header inherited from `/*`; a header with the same name can be set again in the same block (as `/_astro/*` does with `Cache-Control`).

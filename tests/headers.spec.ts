@@ -132,7 +132,8 @@ test("caches hashed assets without the document headers", async ({
   expect
     .soft(headers["cache-control"])
     .toBe("public, max-age=31536000, immutable");
-  expect.soft(headers["x-robots-tag"]).toBe("none");
+  // *.pages.dev deployments match a second rule, which repeats the value.
+  expect.soft(headers["x-robots-tag"]).toMatch(/^none(, none)*$/);
   expect.soft(headers["content-security-policy"]).toBeUndefined();
   expect.soft(headers["permissions-policy"]).toBeUndefined();
 });
