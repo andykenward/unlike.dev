@@ -20,7 +20,7 @@
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.3.5",
     "tailwindcss": "4.3.3",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "devDependencies": {
     "svgo": "4.1.0"
