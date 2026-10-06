@@ -4,6 +4,9 @@ import { getCollection } from "astro:content";
 const CLIENTS = await getCollection("clients").then((data) =>
   data.sort((a, b) => b.data.sortOrder - a.data.sortOrder),
 );
+
+// The first row (three columns at most) is above the fold and holds the LCP image.
+const EAGER_COUNT = 3;
 ---
 
 <section>
@@ -14,7 +17,7 @@ const CLIENTS = await getCollection("clients").then((data) =>
     aria-labelledby="experience"
     class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3"
   >
-    {CLIENTS.map(({ data: { href, title, asset } }) => (
+    {CLIENTS.map(({ data: { href, title, asset } }, index) => (
       <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">
         <a
           href={href}
@@ -24,7 +27,8 @@ const CLIENTS = await getCollection("clients").then((data) =>
           class="group size-full bg-transparent transition-[background,filter] duration-300 ease-linear select-none hover:bg-black focus-visible:bg-black dark:bg-transparent dark:hover:bg-white dark:focus-visible:bg-white"
         >
           <img
-            loading="lazy"
+            loading={index < EAGER_COUNT ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : undefined}
             alt={`${title} Logo`}
             width={asset.width}
             height={asset.height}
