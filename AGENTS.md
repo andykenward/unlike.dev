@@ -37,7 +37,7 @@ Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the 
 
 ## CI and screenshot baselines
 
-`.github/workflows/deploy.yml` runs the pre-commit hooks (`prek run --all-files`), builds, deploys to Cloudflare Pages (preview on PRs, production on `main`), then runs Playwright against the deployed URL in the `mcr.microsoft.com/playwright` container matching the installed `@playwright/test` version. `delete.yml` removes preview deployments when a PR closes.
+`.github/workflows/deploy.yml` runs the pre-commit hooks (`prek run --all-files`), builds, deploys to Cloudflare Pages (preview on PRs, production on `main`), then runs Playwright against the deployed URL in the `mcr.microsoft.com/playwright` container matching the installed `@playwright/test` version. `delete.yml` removes preview deployments when a PR closes. The workflow only triggers for PRs whose base is `main`, so a stacked PR must also target `main` (its diff then includes the parent branch's commits) or it gets no preview and no Playwright run.
 
 Lighthouse (`lighthouserc.cjs`) is local-only, using Playwright's Chromium (no separate Chrome install); it fails below the category scores asserted there and writes HTML reports to `lighthouse-report/`. It was deliberately left out of CI (Oct 2026): every `*.pages.dev` deployment sits behind Cloudflare Access, and Lighthouse both copies the Access headers into its reports and sends them to third-party origins. Gotchas when reading results:
 
