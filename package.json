@@ -21,6 +21,7 @@
     "prepare": "[ -n \"$CI\" ] || prek install",
     "prettier": "prettier . --write --cache --cache-location '.cache/prettier/'",
     "serve": "node ./server.js --use-system-ca",
+    "serve:pages": "wrangler pages dev www/dist --port 4321 --local-protocol https",
     "pretest": "pnpm --filter www build",
     "test": "playwright test",
     "test:site": "PLAYWRIGHT_TEST_BASE_URL='https://unlike.dev' pnpm exec playwright test",
@@ -48,7 +49,8 @@
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0",
     "prettier-plugin-packagejson": "3.0.2",
-    "prettier-plugin-tailwindcss": "0.8.1"
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "wrangler": "4.148.0"
   },
   "packageManager": "pnpm@10.12.4",
   "engines": {

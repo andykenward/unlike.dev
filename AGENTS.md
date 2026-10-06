@@ -11,7 +11,8 @@ Run from the repo root unless noted.
 ```bash
 pnpm --filter www build   # astro check + astro build → www/dist
 cd www && pnpm run dev    # HTTPS dev server on https://localhost:4321
-pnpm run serve            # HTTP/2 server for the built www/dist on :4321
+pnpm run serve            # HTTP/2 server for the built www/dist on :4321 (ignores _headers)
+pnpm run serve:pages      # Cloudflare Pages emulator for www/dist on :4321 (applies _headers)
 pnpm run lint             # ESLint (whole repo, cached)
 pnpm run prettier         # format everything
 pnpm test                 # builds www (pretest), serves it, runs Playwright
@@ -19,7 +20,7 @@ pnpm run test:site        # Playwright against production
 pnpm run lighthouse       # builds www, serves it, runs Lighthouse CI (3 runs)
 pnpm run lighthouse:site  # Lighthouse CI against production
 
-# Single test (build www first; the webServer only serves www/dist)
+# Single test (build www first; the webServer only serves www/dist via serve:pages)
 pnpm exec playwright test -g "has title" --project=chromium
 ```
 
@@ -59,11 +60,13 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 - Dependencies: `pnpm-workspace.yaml` sets `minimumReleaseAge: 1440`, so packages published in the last 24h won't install. Only `esbuild` and `sharp` may run build scripts.
 - TypeScript is held at 6.x (tried 7.0.2 in Oct 2026): `astro check` refuses TS 7 and `@typescript-eslint/parser` requires `<6.1.0`, so the build and lint both fail. Recheck [typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940) and `@astrojs/check`'s peer range before bumping.
 - ESLint a11y rules (`astro/jsx-a11y/*`) need `eslint-plugin-jsx-a11y-x`, the ESLint 10-compatible fork of `eslint-plugin-jsx-a11y`. `eslint-plugin-astro` loads it implicitly, so it is never imported in `eslint.config.js`; don't remove it as unused.
+- `tests/**/*.spec.ts` are parsed with `@typescript-eslint/parser` (set in `eslint.config.js`), but there is no root `tsconfig.json` and nothing type-checks them on CI: type errors in specs only show in the editor. `playwright/no-skipped-test` allows conditional skips (`test.skip(condition, reason)`).
 - GitHub Actions are pinned to commit SHAs with a `#vX.Y.Z` comment; keep that format when bumping.
 
 ## Rules
 
 Path-scoped conventions live in `.claude/rules/*.md`.
 
-| Rule | Paths | Covers |
-| ---- | ----- | ------ |
+| Rule                                | Paths                                          | Covers                                                                                                        |
+| ----------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [headers](.claude/rules/headers.md) | `www/public/_headers`, `tests/headers.spec.ts` | CSP nonce and Cloudflare-injected scripts, zone-level header overrides, testing with the local Pages emulator |

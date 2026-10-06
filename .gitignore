@@ -146,3 +146,6 @@ dist
 
 # mkcert certificates
 *.pem
+
+# Wrangler local state
+.wrangler

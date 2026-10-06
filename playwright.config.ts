@@ -102,11 +102,13 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
+  /* Serve www/dist with the Cloudflare Pages emulator, which applies
+   * www/public/_headers like a deployment does (server.js does not). */
   webServer: process.env.PLAYWRIGHT_TEST_BASE_URL
     ? undefined
     : {
-        command: "npm run serve",
+        command: "pnpm run serve:pages",
+        env: { WRANGLER_SEND_METRICS: "false" },
         ignoreHTTPSErrors: true,
         url: "https://localhost:4321/",
         timeout: 120 * 1000,
