@@ -33,7 +33,7 @@ Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the 
 
 ## CI and screenshot baselines
 
-`.github/workflows/deploy.yml` lints, builds, deploys to Cloudflare Pages (preview on PRs, production on `main`), then runs Playwright against the deployed URL in the `mcr.microsoft.com/playwright` container matching the installed `@playwright/test` version. `delete.yml` removes preview deployments when a PR closes.
+`.github/workflows/deploy.yml` runs the pre-commit hooks (`prek run --all-files`), builds, deploys to Cloudflare Pages (preview on PRs, production on `main`), then runs Playwright against the deployed URL in the `mcr.microsoft.com/playwright` container matching the installed `@playwright/test` version. `delete.yml` removes preview deployments when a PR closes.
 
 Screenshot comparisons only run on CI (`ignoreSnapshots: !process.env.CI`), because font rendering differs locally. Never regenerate baselines locally. To update them, push the branch and run:
 
@@ -46,7 +46,8 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 ## Conventions
 
 - Conventional Commits: `feat:`, `fix:`, `chore(deps):`, `test:`, `ci:`.
-- [prek](https://prek.j178.dev) pre-commit hook (`prek.toml`) runs Prettier on staged files. Prettier sorts imports. `prek` is a dev dependency (`@j178/prek`) and `pnpm i` installs the Git shim via `prepare` (skipped on CI); if the hook reformats a file the commit aborts, so re-stage and commit again.
+- [prek](https://prek.j178.dev) Git hooks are defined in `prek.toml`. Pre-commit: guards (no commits on `main`, merge markers, large files, private keys), svgo on staged SVGs, Prettier (sorts imports), ESLint, actionlint and zizmor (`.github/zizmor.yml`). Commit-msg: commitlint. Pre-push: `astro check`. If a hook rewrites a file the commit aborts, so re-stage and commit again.
+- `prek` is a dev dependency (`@j178/prek`); `pnpm i` installs the Git shims via `prepare` (skipped on CI). Remote hooks are pinned to commit SHAs with a `# frozen: vX.Y.Z` comment (`prek auto-update --freeze`).
 - Dependencies: `pnpm-workspace.yaml` sets `minimumReleaseAge: 1440`, so packages published in the last 24h won't install. Only `esbuild` and `sharp` may run build scripts.
 - GitHub Actions are pinned to commit SHAs with a `#vX.Y.Z` comment; keep that format when bumping.
 

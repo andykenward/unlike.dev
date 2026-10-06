@@ -67,6 +67,12 @@
     "source=zsh-history-${devcontainerId},target=/home/vscode/.commandhistory,type=volume"
   ],
 
+  "remoteEnv": {
+    // prek builds Python hooks (zizmor) with uv, which can't use the image's
+    // python3-minimal; make uv download its own interpreter instead.
+    "UV_PYTHON_PREFERENCE": "only-managed"
+  },
+
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   "remoteUser": "vscode"
 }
