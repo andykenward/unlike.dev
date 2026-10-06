@@ -11,7 +11,8 @@ Run from the repo root unless noted.
 ```bash
 pnpm --filter www build   # astro check + astro build → www/dist
 cd www && pnpm run dev    # HTTPS dev server on https://localhost:4321
-pnpm run serve            # HTTP/2 server for the built www/dist on :4321
+pnpm run serve:pages      # Cloudflare Pages emulator for www/dist on :4321 (applies _headers); used by Playwright and Lighthouse
+pnpm run serve            # HTTP/2 server for www/dist on :4321 (ignores _headers); manual use only
 pnpm run lint             # ESLint (whole repo, cached)
 pnpm run prettier         # format everything
 pnpm test                 # builds www (pretest), serves it, runs Playwright
@@ -19,7 +20,7 @@ pnpm run test:site        # Playwright against production
 pnpm run lighthouse       # builds www, serves it, runs Lighthouse CI (3 runs)
 pnpm run lighthouse:site  # Lighthouse CI against production
 
-# Single test (build www first; the webServer only serves www/dist)
+# Single test (build www first; the webServer only serves www/dist via serve:pages)
 pnpm exec playwright test -g "has title" --project=chromium
 ```
 
@@ -40,7 +41,7 @@ Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the 
 Lighthouse (`lighthouserc.cjs`) is local-only, using Playwright's Chromium (no separate Chrome install); it fails below the category scores asserted there and writes HTML reports to `lighthouse-report/`. It was deliberately left out of CI (Oct 2026): every `*.pages.dev` deployment sits behind Cloudflare Access, and Lighthouse both copies the Access headers into its reports and sends them to third-party origins. Gotchas when reading results:
 
 - On `unlike.dev` itself Cloudflare injects scripts that are not in this repo (`/cdn-cgi/challenge-platform/...` bot detection, `email-decode.min.js`). They lower Lighthouse best practices to about 82, so `pnpm run lighthouse:site` fails the 90 threshold; changing that is a Cloudflare dashboard setting, not a code fix.
-- The local server (`server.js`) does not compress responses, so ignore "Enable text compression" in local reports.
+- Local runs use the Pages emulator (`serve:pages`), which gzips and applies `_headers` but serves HTTP/1.1, where production is HTTP/2 or 3. Treat protocol-related findings in local reports as an artefact.
 - Playwright sends the Access headers on every request, third parties included, so on CI the Cloudflare Web Analytics beacon fails its CORS preflight and logs a console error. That is an artefact of the test setup, not a site bug.
 
 Screenshot comparisons only run on CI (`ignoreSnapshots: !process.env.CI`), because font rendering differs locally. Never regenerate baselines locally. To update them, push the branch and run:
@@ -59,11 +60,13 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 - Dependencies: `pnpm-workspace.yaml` sets `minimumReleaseAge: 1440`, so packages published in the last 24h won't install. Only `esbuild` and `sharp` may run build scripts.
 - TypeScript is held at 6.x (tried 7.0.2 in Oct 2026): `astro check` refuses TS 7 and `@typescript-eslint/parser` requires `<6.1.0`, so the build and lint both fail. Recheck [typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940) and `@astrojs/check`'s peer range before bumping.
 - ESLint a11y rules (`astro/jsx-a11y/*`) need `eslint-plugin-jsx-a11y-x`, the ESLint 10-compatible fork of `eslint-plugin-jsx-a11y`. `eslint-plugin-astro` loads it implicitly, so it is never imported in `eslint.config.js`; don't remove it as unused.
+- `tests/**/*.spec.ts` are parsed with `@typescript-eslint/parser` (set in `eslint.config.js`), but there is no root `tsconfig.json` and nothing type-checks them on CI: type errors in specs only show in the editor. `playwright/no-skipped-test` allows conditional skips (`test.skip(condition, reason)`).
 - GitHub Actions are pinned to commit SHAs with a `#vX.Y.Z` comment; keep that format when bumping.
 
 ## Rules
 
 Path-scoped conventions live in `.claude/rules/*.md`.
 
-| Rule | Paths | Covers |
-| ---- | ----- | ------ |
+| Rule                                | Paths                                          | Covers                                                                                                        |
+| ----------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [headers](.claude/rules/headers.md) | `www/public/_headers`, `tests/headers.spec.ts` | CSP nonce and Cloudflare-injected scripts, zone-level header overrides, testing with the local Pages emulator |
