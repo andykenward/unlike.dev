@@ -2,3 +2,4 @@ pnpm-lock.yaml
 .astro
 .dist
 .cache
+pnpm-workspace.yaml
