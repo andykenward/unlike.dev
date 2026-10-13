@@ -1,4 +1,5 @@
-import { expect, test, type Page } from "@playwright/test";
+import { type Page } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 /* Tailwind's `sm` (40rem) and `md` (48rem) are the only breakpoints in the
  * built CSS, and `max-w-screen-2xl` caps the content at 96rem. One width per
@@ -319,8 +320,13 @@ test("loads without script errors or failed same-origin requests", async ({
     }
   });
   tab.on("response", (response) => {
-    if (new URL(response.url()).origin === origin && response.status() >= 400) {
+    const url = new URL(response.url());
+    if (url.origin === origin && response.status() >= 400) {
       problems.push(`${response.status()}: ${response.url()}`);
+    }
+    // The fixture aborts the analytics report; a response means it leaked.
+    if (url.hostname === "cloudflareinsights.com") {
+      problems.push(`analytics report sent: ${response.url()}`);
     }
   });
 
