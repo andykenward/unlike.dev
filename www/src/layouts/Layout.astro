@@ -6,19 +6,12 @@ import { META_SITE_DESCRIPTION, META_SITE_TITLE } from "../config";
 
 interface Props {
   title?: string;
-  description?: string;
-  image?: string;
 }
 
-const { title, description, image = "/hotlink-ok/social.jpg" } = Astro.props;
+const { title } = Astro.props;
 
-const TITLE:
-  `${string} | ${typeof META_SITE_TITLE}` | `${typeof META_SITE_TITLE}` = title
-  ? `${title} | ${META_SITE_TITLE}`
-  : `${META_SITE_TITLE}`;
-
-const DESC: string | typeof META_SITE_DESCRIPTION =
-  description || META_SITE_DESCRIPTION;
+const TITLE = title ? `${title} | ${META_SITE_TITLE}` : META_SITE_TITLE;
+const IMAGE = new URL("/hotlink-ok/social.jpg", Astro.url);
 ---
 
 <!doctype html>
@@ -37,17 +30,17 @@ const DESC: string | typeof META_SITE_DESCRIPTION =
     <meta name="generator" content={Astro.generator} />
     <title>{TITLE}</title>
     <meta name="title" content={TITLE} />
-    <meta name="description" content={DESC} />
+    <meta name="description" content={META_SITE_DESCRIPTION} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={TITLE} />
-    <meta property="og:description" content={DESC} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:description" content={META_SITE_DESCRIPTION} />
+    <meta property="og:image" content={IMAGE} />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={TITLE} />
-    <meta property="twitter:description" content={DESC} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <meta property="twitter:description" content={META_SITE_DESCRIPTION} />
+    <meta property="twitter:image" content={IMAGE} />
   </head>
   <body class="mx-8 grid min-h-screen grid-rows-[1fr_min-content] gap-y-20 bg-white dark:bg-black dark:text-white">
     <slot />

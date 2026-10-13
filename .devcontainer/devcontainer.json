@@ -39,7 +39,7 @@
     // One entry: object entries run in parallel, and the plugin installs need
     // claude and both write its plugin files.
     "claude": "curl -fsSL https://claude.ai/install.sh | bash && export PATH=\"$HOME/.local/bin:$PATH\" && claude plugin marketplace add anthropics/claude-plugins-official && claude plugin install mattpocock-skills@claude-plugins-official && claude plugin install ponytail --marketplace ./.claude/marketplace --scope project",
-    "mkcert": "mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost.pem -key-file localhost-key.pem",
+    "mkcert": "mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost+6.pem -key-file localhost+6-key.pem",
     "pnpm": "pnpm i && pnpm exec playwright install --with-deps"
   },
   "containerEnv": {
