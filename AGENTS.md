@@ -43,7 +43,7 @@ Lighthouse (`lighthouserc.cjs`) is local-only, using Playwright's Chromium (no s
 
 - On `unlike.dev` itself Cloudflare injects scripts that are not in this repo (`/cdn-cgi/challenge-platform/...` bot detection, `email-decode.min.js`). They lower Lighthouse best practices to about 82, so `pnpm run lighthouse:site` fails the 90 threshold; changing that is a Cloudflare dashboard setting, not a code fix.
 - Local runs use the Pages emulator (`serve:pages`), which gzips and applies `_headers` but serves HTTP/1.1, where production is HTTP/2 or 3. Treat protocol-related findings in local reports as an artefact.
-- `tests/fixtures.ts` aborts the Cloudflare Web Analytics report in every Playwright run, so tests never count as page views (they did: the report returned 204 against production). The browser logs that abort as a console or page error; that is the test setup, not a site bug.
+- `tests/fixtures.ts` aborts the Cloudflare Web Analytics script in every Playwright run, so tests never count as page views (they did, until Oct 2026). The browser logs that abort as a console error; that is the test setup, not a site bug.
 
 Screenshot comparisons only run on CI (`ignoreSnapshots: !process.env.CI`), because font rendering differs locally. Never regenerate baselines locally. To update them, push the branch and run:
 

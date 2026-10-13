@@ -69,12 +69,6 @@ test("does not violate the content security policy", async ({ page }) => {
   });
 
   await page.goto("/");
-  // The analytics beacon reports when the page is hidden, so give it the
-  // chance to hit connect-src.
-  await page.evaluate(() => {
-    Object.defineProperty(document, "visibilityState", { value: "hidden" });
-    document.dispatchEvent(new Event("visibilitychange"));
-  });
 
   expect(await page.evaluate(() => window.cspViolations)).toEqual([]);
 });

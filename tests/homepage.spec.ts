@@ -299,20 +299,7 @@ test("loads without script errors or failed same-origin requests", async ({
   // A fresh tab, so the listeners are attached before the first request.
   const tab = await page.context().newPage();
   tab.on("pageerror", (error) => {
-    // The analytics beacon is refused away from unlike.dev, and WebKit
-    // reports that CORS failure as a page error.
-    // WebKit's message is "/cloudflareinsights.com/cdn-cgi/rum due to …".
-    const target = error.message
-      .split(/\s+/)
-      .find((part) => part.includes("/"))
-      ?.replace(/^(https?:)?\/+/, "");
-    const host =
-      target && URL.canParse(`https://${target}`)
-        ? new URL(`https://${target}`).hostname
-        : undefined;
-    if (host !== "cloudflareinsights.com") {
-      problems.push(`pageerror: ${error.message}`);
-    }
+    problems.push(`pageerror: ${error.message}`);
   });
   tab.on("requestfailed", (request) => {
     if (new URL(request.url()).origin === origin) {
@@ -324,9 +311,9 @@ test("loads without script errors or failed same-origin requests", async ({
     if (url.origin === origin && response.status() >= 400) {
       problems.push(`${response.status()}: ${response.url()}`);
     }
-    // The fixture aborts the analytics report; a response means it leaked.
-    if (url.hostname === "cloudflareinsights.com") {
-      problems.push(`analytics report sent: ${response.url()}`);
+    // The fixture aborts the analytics script; a response means it leaked.
+    if (url.hostname.endsWith("cloudflareinsights.com")) {
+      problems.push(`analytics leaked: ${response.url()}`);
     }
   });
 
