@@ -312,7 +312,11 @@ test("loads without script errors or failed same-origin requests", async ({
       problems.push(`${response.status()}: ${response.url()}`);
     }
     // The fixture aborts the analytics script; a response means it leaked.
-    if (url.hostname.endsWith("cloudflareinsights.com")) {
+    if (
+      ["static.cloudflareinsights.com", "cloudflareinsights.com"].includes(
+        url.hostname,
+      )
+    ) {
       problems.push(`analytics leaked: ${response.url()}`);
     }
   });
