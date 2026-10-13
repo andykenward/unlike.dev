@@ -1,35 +1,13 @@
 ---
 import { getCollection } from "astro:content";
+import { orderTags } from "../tags";
 
-const TAGS = await getCollection("tags").then((data) =>
-  data
-    .filter((item) => !item.id.startsWith("legacy/"))
-    .sort((a, b) => a.data.sortOrder - b.data.sortOrder),
-);
-
-// Display order of the folders under src/content/tags/.
-const GROUPS = [
-  "language",
-  "react",
-  "graphql",
-  "framework",
-  "platform",
-  "css",
-  "cms",
-  "testing",
-  "tool",
-];
-
-const group = (item: (typeof TAGS)[number]) => item.id.split("/")[0] ?? "";
-const unknown = TAGS.filter((item) => !GROUPS.includes(group(item)));
-if (unknown.length) {
-  throw new Error(
-    `Tag folders missing from GROUPS: ${unknown.map((item) => item.id).join(", ")}`,
-  );
-}
-
-const ORDERED_TAGS = GROUPS.map((name) =>
-  TAGS.filter((item) => group(item) === name),
+const ORDERED_TAGS = orderTags(
+  await getCollection("tags").then((data) =>
+    data
+      .filter((item) => !item.id.startsWith("legacy/"))
+      .sort((a, b) => a.data.sortOrder - b.data.sortOrder),
+  ),
 );
 ---
 

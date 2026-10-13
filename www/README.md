@@ -22,13 +22,14 @@ www/
 
 Run from `www/`, or from the root with `pnpm --filter www <command>`.
 
-| Command               | Action                                            |
-| :-------------------- | :------------------------------------------------ |
-| `pnpm run dev`        | Start the dev server on https://localhost:4321    |
-| `pnpm run build`      | Type-check (`astro check`) and build to `dist/`   |
-| `pnpm run preview`    | Preview the build on https://localhost:4321       |
-| `pnpm run svgo:icons` | Optimise the SVGs in `src/assets/icons/` in place |
-| `pnpm run svgo:svgs`  | Optimise the SVGs in `src/assets/svgs/` in place  |
+| Command               | Action                                              |
+| :-------------------- | :-------------------------------------------------- |
+| `pnpm run dev`        | Start the dev server on https://localhost:4321      |
+| `pnpm run build`      | Type-check (`astro check`) and build to `dist/`     |
+| `pnpm run preview`    | Preview the build on https://localhost:4321         |
+| `pnpm run test`       | Unit tests (Node's test runner, `src/**/*.test.ts`) |
+| `pnpm run svgo:icons` | Optimise the SVGs in `src/assets/icons/` in place   |
+| `pnpm run svgo:svgs`  | Optimise the SVGs in `src/assets/svgs/` in place    |
 
 ## Adding content
 

@@ -9,7 +9,8 @@
     "preview": "astro preview --host --port 4321",
     "start": "astro dev --port 4321 --host",
     "svgo:icons": "svgo --config svgo-icons.config.cjs -r -f ./src/assets/icons -o ./src/assets/icons",
-    "svgo:svgs": "svgo --config svgo.config.cjs -r -f ./src/assets/svgs -o ./src/assets/svgs"
+    "svgo:svgs": "svgo --config svgo.config.cjs -r -f ./src/assets/svgs -o ./src/assets/svgs",
+    "test": "node --test \"src/**/*.test.ts\""
   },
   "dependencies": {
     "@astrojs/check": "0.9.10",

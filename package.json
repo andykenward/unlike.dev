@@ -21,7 +21,7 @@
     "prepare": "[ -n \"$CI\" ] || prek install",
     "prettier": "prettier . --write --cache --cache-location '.cache/prettier/'",
     "serve:pages": "wrangler pages dev www/dist --port 4321 --local-protocol https",
-    "pretest": "pnpm --filter www build",
+    "pretest": "pnpm --filter www test && pnpm --filter www build",
     "test": "playwright test",
     "test:site": "PLAYWRIGHT_TEST_BASE_URL='https://unlike.dev' pnpm exec playwright test",
     "test:ui": "pnpm run test --ui",

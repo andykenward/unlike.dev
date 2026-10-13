@@ -14,7 +14,8 @@ cd www && pnpm run dev    # HTTPS dev server on https://localhost:4321
 pnpm run serve:pages      # Cloudflare Pages emulator for www/dist on :4321 (applies _headers); used by Playwright and Lighthouse
 pnpm run lint             # ESLint (whole repo, cached)
 pnpm run prettier         # format everything
-pnpm test                 # builds www (pretest), serves it, runs Playwright
+pnpm test                 # runs www unit tests and builds www (pretest), serves it, runs Playwright
+pnpm --filter www test    # Node's built-in test runner on www/src/**/*.test.ts (no vitest)
 pnpm run test:site        # Playwright against production
 pnpm run lighthouse       # builds www, serves it, runs Lighthouse CI (3 runs)
 pnpm run lighthouse:site  # Lighthouse CI against production
@@ -29,7 +30,7 @@ Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the 
 ## Architecture
 
 - **Content** lives in Astro content collections (`www/src/content.config.ts`): `clients`, `social`, `tags` (grouped into category folders), `open-source`. Each is a folder of frontmatter-only `.md` files; the schema is the source of truth for required fields (e.g. `tags` needs `sortOrder`, `title`, `href`). `asset` fields are paths into `www/src/assets/` validated with Astro's `image()`.
-- **Components** in `www/src/components/` each render one collection via `getCollection()`. Sorting isn't uniform: `Clients` sorts by `sortOrder` descending, `Header` (social) and `Technology` (tags) ascending, `OpenSource` not at all. `Technology` hides everything under `tags/legacy/` and fails the build for a tag folder missing from its `GROUPS` list. `www/src/pages/index.astro` composes them; site constants are in `www/src/config.ts`.
+- **Components** in `www/src/components/` each render one collection via `getCollection()`. Sorting isn't uniform: `Clients` sorts by `sortOrder` descending, `Header` (social) and `Technology` (tags) ascending, `OpenSource` not at all. `Technology` hides everything under `tags/legacy/` and fails the build for a tag folder missing from `GROUPS` in `www/src/tags.ts` (unit-tested in `tags.test.ts`). `www/src/pages/index.astro` composes them; site constants are in `www/src/config.ts`.
 - **SVGs** go in `www/src/assets/icons/` or `www/src/assets/svgs/`; optimise with `pnpm --filter www run svgo:icons` / `svgo:svgs`.
 - **Styling** is Tailwind CSS 4 via `@tailwindcss/vite`, with no `tailwind.config`: theme tokens are `@theme` in `www/src/styles/global.css`.
 - **Security headers** (CSP etc.) are in `www/public/_headers` (Cloudflare Pages format). Adding external resources means updating the CSP there.
