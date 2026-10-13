@@ -272,14 +272,12 @@ test("describes the organisation as structured data", async ({ page }) => {
     "https://github.com/andykenward",
     "https://www.linkedin.com/in/andykenward/",
   ]);
-  // The same list as the Skills section, legacy excluded.
+  // The same list, in the same order, as the Skills section.
   const skills = await page
     .getByRole("list", { name: "Skills:" })
     .getByRole("link")
     .allInnerTexts();
-  expect(data.knowsAbout.toSorted()).toEqual(
-    skills.map((name) => name.trim()).toSorted(),
-  );
+  expect(data.knowsAbout).toEqual(skills.map((name) => name.trim()));
   expect(data.knowsAbout).not.toContain("Angular");
 });
 
