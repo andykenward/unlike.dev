@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+# Weekly check that every link on the deployed site still answers.
+name: Links
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Mondays 09:00 UTC
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/links.yml
+
+permissions: {}
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 #v2.9.0
+        with:
+          # No checkout: the live page is the input. 403/429 are bot blocks
+          # (npmjs, Contentful), not dead links. /cdn-cgi/ is Cloudflare's
+          # rewritten mailto links.
+          args: >-
+            --no-progress
+            --accept 200,403,429
+            --exclude /cdn-cgi/
+            https://unlike.dev/
+          fail: true
