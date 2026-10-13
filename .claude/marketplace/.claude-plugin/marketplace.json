@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "unlike-dev",
+  "description": "Project-local Claude Code plugins for this repo",
+  "owner": { "name": "Andy Kenward" },
+  "plugins": [
+    {
+      "name": "ponytail",
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail",
+        "ref": "v5.1.0",
+        "sha": "9cc65d03aa2da1db7121b912d03596409ee340b8"
+      },
+      "description": "Lazy senior dev mode"
+    }
+  ]
+}

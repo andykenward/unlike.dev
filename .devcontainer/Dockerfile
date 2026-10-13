@@ -2,12 +2,16 @@
 # runner — pinned by digest. It ships zsh + Oh My Zsh and the non-root `vscode`
 # user (UID 1000), and builds an up-to-date git from source, so local git
 # matches CI instead of lagging at the distro's release.
-FROM mcr.microsoft.com/devcontainers/base:3.0.8-noble@sha256:d7c468679f45a52ad3673d06656b5bf16e488990b17216a1fa295d9e1f89d724
+FROM mcr.microsoft.com/devcontainers/base:3.0.10-noble@sha256:21e9e3275736cb3bc33a2904b279a2ab292c51fedd53c2963463627d4586c3e6
 
 # Mount points for the named volumes in devcontainer.json (Claude Code state,
 # gh CLI auth, zsh history). A volume whose mount point is missing from the
 # image is created root-owned, and the first write fails with EACCES. ~/.config
 # is chowned too, since mkdir -p creates it as root.
-RUN mkdir -p /home/vscode/.claude /home/vscode/.config/gh /home/vscode/.commandhistory \
-    && chown -R vscode:vscode /home/vscode/.claude /home/vscode/.config /home/vscode/.commandhistory
+RUN mkdir -p /home/vscode/.claude /home/vscode/.agents /home/vscode/.config/gh /home/vscode/.commandhistory \
+    && chown -R vscode:vscode /home/vscode/.claude /home/vscode/.agents /home/vscode/.config /home/vscode/.commandhistory
 
+# Shell history location and prompt; see the comments in zshrc. Appended, not
+# copied over, so the base image's Oh My Zsh setup stays.
+COPY zshrc /tmp/zshrc
+RUN cat /tmp/zshrc >> /home/vscode/.zshrc && rm /tmp/zshrc

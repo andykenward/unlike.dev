@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "outputStyle": "Concise",
   "hooks": {
     "Stop": [
       {
@@ -13,5 +12,18 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "mattpocock-skills@claude-plugins-official": true,
+    "ponytail@unlike-dev": true
+  },
+  "extraKnownMarketplaces": {
+    "unlike-dev": {
+      "source": {
+        "source": "directory",
+        "path": "./.claude/marketplace"
+      }
+    }
+  },
+  "outputStyle": "Concise"
 }
