@@ -93,6 +93,9 @@ updates:
       minor-and-patch:
         patterns:
           - "*"
+        # a Playwright bump shifts screenshots; keep it out so it never blocks the group
+        exclude-patterns:
+          - "@playwright/test"
         update-types:
           - "minor"
           - "patch"
