@@ -38,6 +38,10 @@ updates:
       timezone: "Europe/London"
     cooldown:
       default-days: 5
+    groups:
+      actions:
+        patterns:
+          - "*"
   - package-ecosystem: npm
     assignees:
       - "andykenward"
@@ -53,6 +57,15 @@ updates:
       semver-major-days: 30
       semver-minor-days: 7
       semver-patch-days: 3
+    ignore:
+      # keep @types/node on the same major as engines.node
+      - dependency-name: "@types/node"
+        update-types:
+          - "version-update:semver-major"
+      # TS 7 is rejected by astro check and @typescript-eslint/parser (see AGENTS.md)
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
     groups:
       astro:
         patterns:
@@ -82,3 +95,12 @@ updates:
         patterns:
           - "tailwindcss"
           - "@tailwindcss/*"
+      minor-and-patch:
+        patterns:
+          - "*"
+        # a Playwright bump shifts screenshots; keep it out so it never blocks the group
+        exclude-patterns:
+          - "@playwright/test"
+        update-types:
+          - "minor"
+          - "patch"
