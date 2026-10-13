@@ -13,7 +13,6 @@
     "ghcr.io/devcontainers/features/github-cli:1.1.3": {
       "extensions": "github/gh-stack"
     },
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0.5": {},
     "ghcr.io/devcontainers-extra/features/mkcert:1": {}
   },
   "customizations": {
@@ -36,8 +35,10 @@
     }
   },
   "postCreateCommand": {
-    // One entry: object entries run in parallel, and both installs write Claude's plugin files.
-    "claude-plugins": "claude plugin marketplace add anthropics/claude-plugins-official && claude plugin install mattpocock-skills@claude-plugins-official && claude plugin install ponytail --marketplace ./.claude/marketplace --scope project",
+    // Native installer (~/.local/bin) so Claude Code can auto-update without sudo.
+    // One entry: object entries run in parallel, and the plugin installs need
+    // claude and both write its plugin files.
+    "claude": "curl -fsSL https://claude.ai/install.sh | bash && export PATH=\"$HOME/.local/bin:$PATH\" && claude plugin marketplace add anthropics/claude-plugins-official && claude plugin install mattpocock-skills@claude-plugins-official && claude plugin install ponytail --marketplace ./.claude/marketplace --scope project",
     "mkcert": "mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost.pem -key-file localhost-key.pem",
     "pnpm": "pnpm i && pnpm exec playwright install --with-deps"
   },
