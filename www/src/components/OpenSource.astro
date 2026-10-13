@@ -13,7 +13,7 @@ const DATA = await getCollection("open-source");
     class="grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-5"
   >
     {DATA.map(({ data: { href, title, asset } }) => (
-      <li>
+      <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">
         <a
           href={href}
           aria-label={title}
