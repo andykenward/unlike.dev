@@ -2,13 +2,7 @@
 import { getCollection } from "astro:content";
 import { orderTags } from "../tags";
 
-const ORDERED_TAGS = orderTags(
-  await getCollection("tags").then((data) =>
-    data
-      .filter((item) => !item.id.startsWith("legacy/"))
-      .sort((a, b) => a.data.sortOrder - b.data.sortOrder),
-  ),
-);
+const ORDERED_TAGS = orderTags(await getCollection("tags"));
 ---
 
 <section>

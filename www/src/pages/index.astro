@@ -7,6 +7,7 @@ import OpenSource from "../components/OpenSource.astro";
 import Technology from "../components/Technology.astro";
 import { EMAIL, META_SITE_DESCRIPTION } from "../config";
 import Layout from "../layouts/Layout.astro";
+import { orderTags } from "../tags";
 
 // Structured data (schema.org) so search engines read the skills as a list, not loose words.
 const organization = {
@@ -21,10 +22,13 @@ const organization = {
     addressLocality: "London",
     addressCountry: "GB",
   },
-  founder: { "@type": "Person", name: "Andy Kenward" },
-  sameAs: (await getCollection("social")).map((item) => item.data.href),
-  knowsAbout: (await getCollection("tags"))
-    .filter((item) => !item.id.startsWith("legacy/"))
+  founder: {
+    "@type": "Person",
+    name: "Andy Kenward",
+    sameAs: (await getCollection("social")).map((item) => item.data.href),
+  },
+  knowsAbout: orderTags(await getCollection("tags"))
+    .flat()
     .map((item) => item.data.title),
 };
 ---
@@ -40,6 +44,6 @@ const organization = {
   <script
     is:inline
     type="application/ld+json"
-    set:html={JSON.stringify(organization)}
+    set:html={JSON.stringify(organization).replaceAll("<", "\\u003c")}
   />
 </Layout>

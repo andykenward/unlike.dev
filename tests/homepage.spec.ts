@@ -267,7 +267,8 @@ test("describes the organisation as structured data", async ({ page }) => {
     address: { addressLocality: "London", addressCountry: "GB" },
     founder: { name: "Andy Kenward" },
   });
-  expect(data.sameAs.toSorted()).toEqual([
+  // The profiles are Andy's, so they identify the founder, not the company.
+  expect(data.founder.sameAs.toSorted()).toEqual([
     "https://github.com/andykenward",
     "https://www.linkedin.com/in/andykenward/",
   ]);
