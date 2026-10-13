@@ -2,13 +2,7 @@
 import { getCollection } from "astro:content";
 import { orderTags } from "../tags";
 
-const ORDERED_TAGS = orderTags(
-  await getCollection("tags").then((data) =>
-    data
-      .filter((item) => !item.id.startsWith("legacy/"))
-      .sort((a, b) => a.data.sortOrder - b.data.sortOrder),
-  ),
-);
+const ORDERED_TAGS = orderTags(await getCollection("tags"));
 ---
 
 <section>
@@ -25,7 +19,7 @@ const ORDERED_TAGS = orderTags(
           <a
             class="text-lg underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-linear hover:decoration-current focus-visible:decoration-current md:text-xl"
             href={data.href}
-            rel="noreferrer nofollow"
+            rel="noreferrer"
           >
             {data.title}
           </a>

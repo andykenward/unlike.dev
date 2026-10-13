@@ -1,10 +1,36 @@
 ---
+import { getCollection } from "astro:content";
 import Clients from "../components/Clients.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import OpenSource from "../components/OpenSource.astro";
 import Technology from "../components/Technology.astro";
+import { EMAIL, META_SITE_DESCRIPTION } from "../config";
 import Layout from "../layouts/Layout.astro";
+import { orderTags } from "../tags";
+
+// Structured data (schema.org) so search engines read the skills as a list, not loose words.
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Unlike Ltd",
+  url: Astro.site,
+  email: EMAIL,
+  description: META_SITE_DESCRIPTION,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "London",
+    addressCountry: "GB",
+  },
+  founder: {
+    "@type": "Person",
+    name: "Andy Kenward",
+    sameAs: (await getCollection("social")).map((item) => item.data.href),
+  },
+  knowsAbout: orderTags(await getCollection("tags"))
+    .flat()
+    .map((item) => item.data.title),
+};
 ---
 
 <Layout>
@@ -15,4 +41,9 @@ import Layout from "../layouts/Layout.astro";
     <Technology />
   </main>
   <Footer />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(organization).replaceAll("<", "\\u003c")}
+  />
 </Layout>

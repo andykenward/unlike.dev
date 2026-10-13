@@ -34,7 +34,7 @@ test("has title", async ({ page }) => {
 test("sets the document language and metadata", async ({ page }) => {
   const title = "Unlike - Full Stack Application Engineering";
   const description =
-    "Full Stack application engineering. Based in London, England.";
+    "Full Stack application engineering with TypeScript, React, Node.js, Astro and Cloudflare. Based in London, England.";
 
   await expect(page.locator("html")).toHaveAttribute("lang", "en-GB");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
@@ -245,10 +245,39 @@ test("lists skills without legacy technologies", async ({ page }) => {
     );
   }
 
+  // Tools we use are endorsed links, so no nofollow.
   for (const link of await links.all()) {
     await expect(link).toHaveAttribute("href", /^https:\/\//);
-    await expect(link).toHaveAttribute("rel", "noreferrer nofollow");
+    await expect(link).toHaveAttribute("rel", "noreferrer");
   }
+});
+
+test("describes the organisation as structured data", async ({ page }) => {
+  const jsonLd = page.locator('script[type="application/ld+json"]');
+
+  await expect(jsonLd).toHaveCount(1);
+  const data = JSON.parse((await jsonLd.textContent()) ?? "{}");
+
+  expect(data).toMatchObject({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Unlike Ltd",
+    url: "https://unlike.dev/",
+    email: "hi@unlike.dev",
+    address: { addressLocality: "London", addressCountry: "GB" },
+    founder: { name: "Andy Kenward" },
+  });
+  // The profiles are Andy's, so they identify the founder, not the company.
+  expect(data.founder.sameAs.toSorted()).toEqual([
+    "https://github.com/andykenward",
+    "https://www.linkedin.com/in/andykenward/",
+  ]);
+  // The same list, in the same order, as the Skills section.
+  const skills = await page
+    .getByRole("list", { name: "Skills:" })
+    .getByRole("link")
+    .allInnerTexts();
+  expect(data.knowsAbout).toEqual(skills.map((name) => name.trim()));
 });
 
 test("section headings link to their own anchors", async ({ page }) => {
