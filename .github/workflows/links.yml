@@ -21,12 +21,12 @@ jobs:
     steps:
       - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 #v2.9.0
         with:
-          # No checkout: the live page is the input. 403/429 are bot blocks
-          # (npmjs, Contentful), not dead links. /cdn-cgi/ is Cloudflare's
-          # rewritten mailto links.
+          # No checkout: the live page is the input. 403/429/999 are bot blocks
+          # (npmjs, Contentful, LinkedIn), not dead links. /cdn-cgi/ is
+          # Cloudflare's rewritten mailto links.
           args: >-
             --no-progress
-            --accept 200,403,429
+            --accept 200,403,429,999
             --exclude /cdn-cgi/
             https://unlike.dev/
           fail: true
