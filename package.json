@@ -46,8 +46,8 @@
     "eslint-plugin-playwright": "2.12.1",
     "koa": "3.2.1",
     "koa-static": "5.0.0",
-    "prettier": "3.9.9",
-    "prettier-plugin-astro": "1.1.0",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.1",
     "prettier-plugin-packagejson": "3.0.2",
     "prettier-plugin-tailwindcss": "0.8.1",
     "wrangler": "4.148.0"
