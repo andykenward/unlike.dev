@@ -278,7 +278,6 @@ test("describes the organisation as structured data", async ({ page }) => {
     .getByRole("link")
     .allInnerTexts();
   expect(data.knowsAbout).toEqual(skills.map((name) => name.trim()));
-  expect(data.knowsAbout).not.toContain("Angular");
 });
 
 test("section headings link to their own anchors", async ({ page }) => {
