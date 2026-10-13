@@ -19,15 +19,11 @@ updates:
     cooldown:
       default-days: 5
   - package-ecosystem: docker
-    assignees:
-      - "andykenward"
-    directory: "/"
+    directory: /.devcontainer
     schedule:
       interval: weekly
-      time: "12:00"
-      timezone: "Europe/London"
     cooldown:
-      default-days: 5
+      default-days: 7
   - package-ecosystem: github-actions
     assignees:
       - "andykenward"

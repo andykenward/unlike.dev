@@ -52,9 +52,9 @@
     "prettier-plugin-tailwindcss": "0.8.1",
     "wrangler": "4.148.0"
   },
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@11.22.0",
   "engines": {
     "node": "^24.10.0",
-    "pnpm": "^10.12.4"
+    "pnpm": "^11.22.0"
   }
 }

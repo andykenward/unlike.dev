@@ -2,12 +2,31 @@
 # runner — pinned by digest. It ships zsh + Oh My Zsh and the non-root `vscode`
 # user (UID 1000), and builds an up-to-date git from source, so local git
 # matches CI instead of lagging at the distro's release.
-FROM mcr.microsoft.com/devcontainers/base:3.0.8-noble@sha256:d7c468679f45a52ad3673d06656b5bf16e488990b17216a1fa295d9e1f89d724
+FROM mcr.microsoft.com/devcontainers/base:3.0.10-noble@sha256:21e9e3275736cb3bc33a2904b279a2ab292c51fedd53c2963463627d4586c3e6
+
+# prek — pre-commit hook manager, copied from the official distroless image.
+# The digest is the multi-arch index, so amd64 and arm64 each get their own
+# binary.
+COPY --from=ghcr.io/j178/prek:0.4.11@sha256:b8fc85002e8b77d27fa2b8f305bbde52517a314a0d148d6cc816c53324f0d223 /prek /usr/local/bin/prek
 
 # Mount points for the named volumes in devcontainer.json (Claude Code state,
 # gh CLI auth, zsh history). A volume whose mount point is missing from the
 # image is created root-owned, and the first write fails with EACCES. ~/.config
 # is chowned too, since mkdir -p creates it as root.
-RUN mkdir -p /home/vscode/.claude /home/vscode/.config/gh /home/vscode/.commandhistory \
-    && chown -R vscode:vscode /home/vscode/.claude /home/vscode/.config /home/vscode/.commandhistory
+RUN mkdir -p /home/vscode/.claude /home/vscode/.agents /home/vscode/.config/gh /home/vscode/.commandhistory \
+    && chown -R vscode:vscode /home/vscode/.claude /home/vscode/.agents /home/vscode/.config /home/vscode/.commandhistory
 
+# Shell history location and prompt; see the comments in zshrc. Appended, not
+# copied over, so the base image's Oh My Zsh setup stays.
+COPY zshrc /tmp/zshrc
+RUN cat /tmp/zshrc >> /home/vscode/.zshrc && rm /tmp/zshrc
+# playwright extras
+USER root
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		xvfb xauth libnss3-tools \
+		libatk1.0-0t64 libatk-bridge2.0-0t64 libdbus-1-3 libcups2t64 \
+		libxkbcommon0 libasound2t64 libcairo2 libpango-1.0-0 \
+		libxcomposite1 libxdamage1 libxfixes3 libatspi2.0-0 \
+	&& rm -rf /var/lib/apt/lists/*
+USER vscode
