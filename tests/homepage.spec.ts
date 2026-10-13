@@ -1,4 +1,5 @@
-import { expect, test, type Page } from "@playwright/test";
+import { type Page } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 /* Tailwind's `sm` (40rem) and `md` (48rem) are the only breakpoints in the
  * built CSS, and `max-w-screen-2xl` caps the content at 96rem. One width per
@@ -298,20 +299,7 @@ test("loads without script errors or failed same-origin requests", async ({
   // A fresh tab, so the listeners are attached before the first request.
   const tab = await page.context().newPage();
   tab.on("pageerror", (error) => {
-    // The analytics beacon is refused away from unlike.dev, and WebKit
-    // reports that CORS failure as a page error.
-    // WebKit's message is "/cloudflareinsights.com/cdn-cgi/rum due to …".
-    const target = error.message
-      .split(/\s+/)
-      .find((part) => part.includes("/"))
-      ?.replace(/^(https?:)?\/+/, "");
-    const host =
-      target && URL.canParse(`https://${target}`)
-        ? new URL(`https://${target}`).hostname
-        : undefined;
-    if (host !== "cloudflareinsights.com") {
-      problems.push(`pageerror: ${error.message}`);
-    }
+    problems.push(`pageerror: ${error.message}`);
   });
   tab.on("requestfailed", (request) => {
     if (new URL(request.url()).origin === origin) {
@@ -319,8 +307,17 @@ test("loads without script errors or failed same-origin requests", async ({
     }
   });
   tab.on("response", (response) => {
-    if (new URL(response.url()).origin === origin && response.status() >= 400) {
+    const url = new URL(response.url());
+    if (url.origin === origin && response.status() >= 400) {
       problems.push(`${response.status()}: ${response.url()}`);
+    }
+    // The fixture aborts the analytics script; a response means it leaked.
+    if (
+      ["static.cloudflareinsights.com", "cloudflareinsights.com"].includes(
+        url.hostname,
+      )
+    ) {
+      problems.push(`analytics leaked: ${response.url()}`);
     }
   });
 
