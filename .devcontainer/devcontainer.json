@@ -36,16 +36,13 @@
     }
   },
   "postCreateCommand": {
-    "marketplace-claude": "claude plugin marketplace add anthropics/claude-plugins-official && claude plugin install mattpocock-skills@claude-plugins-official",
-    "claude-plugins": "claude plugin install ponytail --marketplace ./.claude/marketplace --scope project",
-    // "skills-ponytail": "claude plugin install ponytail@ponytail",
-    // "skills-mattpocock": "claude plugin install mattpocock-skills@claude-plugins-official",
+    // One entry: object entries run in parallel, and both installs write Claude's plugin files.
+    "claude-plugins": "claude plugin marketplace add anthropics/claude-plugins-official && claude plugin install mattpocock-skills@claude-plugins-official && claude plugin install ponytail --marketplace ./.claude/marketplace --scope project",
     "mkcert": "mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost.pem -key-file localhost-key.pem",
-    "pnpm": "pnpm i"
+    "pnpm": "pnpm i && pnpm exec playwright install --with-deps"
   },
   "containerEnv": {
     "CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
-    "PLAYWRIGHT_BROWSERS_PATH": "/home/vscode/.cache/ms-playwright",
     // prek builds Python hooks (zizmor) with uv, which can't use the image's
     // python3-minimal; make uv download its own interpreter instead.
     "UV_PYTHON_PREFERENCE": "only-managed"

@@ -15,13 +15,3 @@ RUN mkdir -p /home/vscode/.claude /home/vscode/.agents /home/vscode/.config/gh /
 # copied over, so the base image's Oh My Zsh setup stays.
 COPY zshrc /tmp/zshrc
 RUN cat /tmp/zshrc >> /home/vscode/.zshrc && rm /tmp/zshrc
-# playwright extras
-USER root
-RUN apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		xvfb xauth libnss3-tools \
-		libatk1.0-0t64 libatk-bridge2.0-0t64 libdbus-1-3 libcups2t64 \
-		libxkbcommon0 libasound2t64 libcairo2 libpango-1.0-0 \
-		libxcomposite1 libxdamage1 libxfixes3 libatspi2.0-0 \
-	&& rm -rf /var/lib/apt/lists/*
-USER vscode

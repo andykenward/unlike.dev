@@ -18,7 +18,7 @@
     "ponytail@unlike-dev": true
   },
   "extraKnownMarketplaces": {
-    "cloudflare-pages-action": {
+    "unlike-dev": {
       "source": {
         "source": "directory",
         "path": "./.claude/marketplace"
