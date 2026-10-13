@@ -60,7 +60,12 @@ updates:
     ignore:
       # keep @types/node on the same major as engines.node
       - dependency-name: "@types/node"
-        update-types: ["version-update:semver-major"]
+        update-types:
+          - "version-update:semver-major"
+      # TS 7 is rejected by astro check and @typescript-eslint/parser (see AGENTS.md)
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
     groups:
       astro:
         patterns:
