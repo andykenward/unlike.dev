@@ -41,7 +41,6 @@
     // "skills-ponytail": "claude plugin install ponytail@ponytail",
     // "skills-mattpocock": "claude plugin install mattpocock-skills@claude-plugins-official",
     "mkcert": "mkcert -install && mkcert localhost 127.0.0.1 ::1 -cert-file localhost.pem -key-file localhost-key.pem",
-    "prek": "prek install",
     "pnpm": "pnpm i"
   },
   "containerEnv": {
