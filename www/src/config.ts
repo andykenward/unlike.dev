@@ -6,6 +6,6 @@ export const SITE_DESCRIPTION = "Full Stack application engineering.";
 
 export const META_SITE_TITLE = "Unlike - Full Stack Application Engineering";
 export const META_SITE_DESCRIPTION =
-  "Full Stack application engineering. Based in London, England.";
+  "Full Stack application engineering with TypeScript, React, Node.js, Astro and Cloudflare. Based in London, England.";
 
 export const EMAIL = "hi@unlike.dev";
