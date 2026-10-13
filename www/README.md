@@ -27,7 +27,6 @@ Run from `www/`, or from the root with `pnpm --filter www <command>`.
 | `pnpm run dev`        | Start the dev server on https://localhost:4321    |
 | `pnpm run build`      | Type-check (`astro check`) and build to `dist/`   |
 | `pnpm run preview`    | Preview the build on https://localhost:4321       |
-| `pnpm run tsc:check`  | Type-check TypeScript and JavaScript with `tsc`   |
 | `pnpm run svgo:icons` | Optimise the SVGs in `src/assets/icons/` in place |
 | `pnpm run svgo:svgs`  | Optimise the SVGs in `src/assets/svgs/` in place  |
 

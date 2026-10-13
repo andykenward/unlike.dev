@@ -5,7 +5,7 @@ Source for [unlike.dev](https://unlike.dev), the website of Unlike Ltd. Built wi
 ## Requirements
 
 - Node `^24.10.0`
-- pnpm `^10.12.4`
+- pnpm `^11.22.0`
 - [mkcert](https://github.com/FiloSottile/mkcert) for local HTTPS
 
 The included [dev container](.devcontainer/devcontainer.json) sets all of this up, plus Playwright browsers and Claude Code.
@@ -15,7 +15,7 @@ The included [dev container](.devcontainer/devcontainer.json) sets all of this u
 ```bash
 pnpm install
 
-# Local HTTPS certificates, read by the dev server, preview server and tests
+# Local HTTPS certificates, read by the dev server and tests
 mkcert -install
 mkcert -cert-file localhost+6.pem -key-file localhost+6-key.pem localhost 127.0.0.1 ::1
 
@@ -26,15 +26,15 @@ cd www && pnpm run dev    # https://localhost:4321
 
 Run from the repo root.
 
-| Command                   | Action                                               |
-| :------------------------ | :--------------------------------------------------- |
-| `pnpm --filter www build` | Type-check and build the site to `www/dist`          |
-| `pnpm run serve`          | Serve the built site over HTTP/2 on `localhost:4321` |
-| `pnpm run lint`           | Lint with ESLint                                     |
-| `pnpm run prettier`       | Format with Prettier                                 |
-| `pnpm test`               | Build, serve and run the Playwright tests            |
-| `pnpm run test:ui`        | Run the Playwright tests in UI mode                  |
-| `pnpm run test:site`      | Run the Playwright tests against https://unlike.dev  |
+| Command                   | Action                                              |
+| :------------------------ | :-------------------------------------------------- |
+| `pnpm --filter www build` | Type-check and build the site to `www/dist`         |
+| `pnpm run serve:pages`    | Serve the built site like Cloudflare Pages does     |
+| `pnpm run lint`           | Lint with ESLint                                    |
+| `pnpm run prettier`       | Format with Prettier                                |
+| `pnpm test`               | Build, serve and run the Playwright tests           |
+| `pnpm run test:ui`        | Run the Playwright tests in UI mode                 |
+| `pnpm run test:site`      | Run the Playwright tests against https://unlike.dev |
 
 ## Content
 

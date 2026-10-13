@@ -10,10 +10,6 @@ on:
       - main
   workflow_dispatch:
     inputs:
-      environment:
-        description: "Environment to run action against"
-        type: environment
-        required: false
       update-snapshots:
         description: "Regenerate Playwright screenshot baselines and commit them to this branch"
         type: boolean

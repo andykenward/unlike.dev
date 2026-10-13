@@ -193,10 +193,9 @@ test("lists clients, most recent first, as external links", async ({
   await expect(links.first()).toHaveAccessibleName(
     "Starling Bank | Award-winning bank accounts.",
   );
-  await expect(links.filter({ hasText: "Google" }).first()).toHaveAttribute(
-    "href",
-    "https://www.google.com/",
-  );
+  await expect(
+    links.and(page.getByTitle("Google", { exact: true })),
+  ).toHaveAttribute("href", "https://www.google.com/");
 
   for (const link of await links.all()) {
     await expect(link).toHaveAttribute("href", /^https:\/\//);
@@ -322,10 +321,7 @@ test("loads without script errors or failed same-origin requests", async ({
   });
 
   await tab.goto("/");
-  for (const img of await tab.getByRole("img").all()) {
-    await img.scrollIntoViewIfNeeded();
-    await expect(img).toHaveJSProperty("complete", true);
-  }
+  await loadAllImages(tab);
 
   expect(problems).toEqual([]);
 });
