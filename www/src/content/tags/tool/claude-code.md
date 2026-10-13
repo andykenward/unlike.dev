@@ -1,5 +1,5 @@
 ---
 sortOrder: 13
 title: Claude Code
-href: https://claude.com/claude-code
+href: https://claude.com/product/claude-code
 ---

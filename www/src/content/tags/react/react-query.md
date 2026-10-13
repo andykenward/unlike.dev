@@ -1,5 +1,5 @@
 ---
 sortOrder: 1
 title: TanStack Query
-href: https://tanstack.com/query/
+href: https://tanstack.com/query/latest
 ---
