@@ -15,6 +15,7 @@
   "scripts": {
     "prelighthouse": "pnpm --filter www build",
     "lighthouse": "lhci autorun",
+    "lighthouse:serve": "wrangler pages dev lighthouse-report --port 8080",
     "lighthouse:site": "LIGHTHOUSE_BASE_URL='https://unlike.dev' pnpm exec lhci autorun",
     "lint": "eslint --cache --cache-location '.cache/eslint/' .",
     "lint:ls": "DEBUG=eslint:eslint pnpm run lint",
