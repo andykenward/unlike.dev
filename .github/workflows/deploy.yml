@@ -94,7 +94,9 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
       - name: Run Playwright tests
-        run: pnpm exec playwright test ${{ inputs.update-snapshots && '--update-snapshots' || '' }}
+        # "all" rewrites every baseline. The default only rewrites ones that
+        # fail, so a change inside the pixel tolerance would never land.
+        run: pnpm exec playwright test ${{ inputs.update-snapshots && '--update-snapshots=all' || '' }}
         env:
           CLOUDFLARE_ACCESS_CLIENT_ID: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_ID }}
           CLOUDFLARE_ACCESS_CLIENT_SECRET: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_SECRET }}
