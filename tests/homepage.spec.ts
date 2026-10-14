@@ -386,6 +386,19 @@ test("uses a dark background with light text in dark mode", async ({
   await expect(body).toHaveCSS("color", "rgb(255, 255, 255)");
 });
 
+for (const colorScheme of ["light", "dark"] as const) {
+  test(`has no accessibility violations in ${colorScheme} mode`, async ({
+    page,
+    makeAxeBuilder,
+  }) => {
+    await page.emulateMedia({ colorScheme });
+
+    const results = await makeAxeBuilder().analyze();
+
+    expect(results.violations).toEqual([]);
+  });
+}
+
 test("homepage snapshot", async ({ page }) => {
   const link = page.getByRole("link", {
     name: "GitHub Action Cloudflare Pages",
