@@ -5,8 +5,10 @@ import eslintPluginAstro from "eslint-plugin-astro";
 import eslintPluginPlaywright from "eslint-plugin-playwright";
 
 export default [
+  { ignores: [".wrangler/", "www/.astro/"] },
   ...eslintPluginAstro.configs.recommended,
   ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+  { files: ["**/*.ts"], languageOptions: { parser: tsParser } },
   {
     ...eslintPluginPlaywright.configs["flat/recommended"],
     files: ["tests/**/*.spec.ts"],

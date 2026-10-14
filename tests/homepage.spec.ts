@@ -18,6 +18,8 @@ const loadAllImages = async (page: Page) => {
     await img.scrollIntoViewIfNeeded();
     await expect(img).toBeVisible();
     await expect(img).toHaveJSProperty("complete", true);
+    // A broken image is "complete" too, but has no intrinsic size.
+    await expect(img).not.toHaveJSProperty("naturalWidth", 0);
   }
 };
 
@@ -73,6 +75,9 @@ test("serves the social image and favicon", async ({ request }) => {
   const favicon = await request.get("/hotlink-ok/favicon.svg");
   await expect(favicon).toBeOK();
   expect(favicon.headers()["content-type"]).toContain("image/svg+xml");
+
+  // Safari ignores SVG favicons and uses the .ico.
+  await expect(await request.get("/hotlink-ok/favicon.ico")).toBeOK();
 });
 
 test("links to the contact email in the header and footer", async ({
@@ -306,15 +311,8 @@ test("shows the company registration in the footer", async ({ page }) => {
 });
 
 test("loads every image", async ({ page }) => {
-  const images = page.getByRole("img");
-
-  await expect(images).not.toHaveCount(0);
-  for (const img of await images.all()) {
-    await img.scrollIntoViewIfNeeded();
-    await expect(img).toHaveJSProperty("complete", true);
-    // A broken image is "complete" too, but has no intrinsic size.
-    await expect(img).not.toHaveJSProperty("naturalWidth", 0);
-  }
+  await expect(page.getByRole("img")).not.toHaveCount(0);
+  await loadAllImages(page);
 });
 
 test("loads without script errors or failed same-origin requests", async ({
