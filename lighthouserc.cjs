@@ -19,7 +19,7 @@ module.exports = {
           "--no-sandbox",
           /* Without this the tab crashes in containers with a small /dev/shm. */
           "--disable-dev-shm-usage",
-          BASE_URL ? "" : "--ignore-certificate-errors",
+          ...(BASE_URL ? [] : ["--ignore-certificate-errors"]),
         ].join(" "),
       },
     },
