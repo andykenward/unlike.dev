@@ -65,6 +65,7 @@ The `commit-snapshots` job commits the new `tests/screenshots/*.png` to the bran
 - ESLint a11y rules (`astro/jsx-a11y/*`) need `eslint-plugin-jsx-a11y-x`, the ESLint 10-compatible fork of `eslint-plugin-jsx-a11y`. `eslint-plugin-astro` loads it implicitly, so it is never imported in `eslint.config.js`; don't remove it as unused.
 - `tests/**/*.spec.ts` are parsed with `@typescript-eslint/parser` (set in `eslint.config.js`), but there is no root `tsconfig.json` and nothing type-checks them on CI: type errors in specs only show in the editor. `playwright/no-skipped-test` allows conditional skips (`test.skip(condition, reason)`).
 - GitHub Actions are pinned to commit SHAs with a `#vX.Y.Z` comment; keep that format when bumping.
+- `.mcp.json` registers the `astro-docs` MCP server. Its only tool, `search_astro_docs`, returns ranked doc chunks with source URLs; use it for Astro API questions (collections, loaders, `astro:assets`, upgrade guides) instead of recalling from memory, and fetch the `source_url` when a chunk lacks context. It does not know the installed Astro version.
 
 ## Rules
 
