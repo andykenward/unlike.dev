@@ -1,27 +1,23 @@
-import { defineCollection } from "astro:content";
+import { defineCollection, type SchemaContext } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+const linkWithLogo = ({ image }: SchemaContext) =>
+  z.object({
+    sortOrder: z.number(),
+    asset: image(),
+    href: z.url(),
+    title: z.string(),
+  });
+
 const clients = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/clients" }),
-  schema: ({ image }) =>
-    z.object({
-      sortOrder: z.number(),
-      asset: image(),
-      href: z.url(),
-      title: z.string(),
-    }),
+  schema: linkWithLogo,
 });
 
 const social = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/social" }),
-  schema: ({ image }) =>
-    z.object({
-      sortOrder: z.number(),
-      asset: image(),
-      href: z.url(),
-      title: z.string(),
-    }),
+  schema: linkWithLogo,
 });
 
 const tags = defineCollection({

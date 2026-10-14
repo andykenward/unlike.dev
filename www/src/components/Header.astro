@@ -38,10 +38,10 @@ const SOCIAL = await getCollection("social").then((data) =>
         title={title}
         href={href}
         rel="noreferrer nofollow"
-        class="group text-4xl transition-[filter] duration-300 ease-linear select-none"
+        class="group transition-[filter] duration-300 ease-linear select-none"
       >
         <img
-          alt={`${title}`}
+          alt={title}
           width={asset.width}
           height={asset.height}
           src={asset.src}

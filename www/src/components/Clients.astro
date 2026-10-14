@@ -18,7 +18,7 @@ const EAGER_COUNT = 5;
     class="grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-5"
   >
     {CLIENTS.map(({ data: { href, title, asset } }, index) => (
-      <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">
+      <li class="flex aspect-square items-center justify-center">
         <a
           href={href}
           aria-label={title}

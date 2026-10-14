@@ -13,13 +13,13 @@ const DATA = await getCollection("open-source");
     class="grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-5"
   >
     {DATA.map(({ data: { href, title, asset } }) => (
-      <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">
+      <li class="flex aspect-square items-center justify-center">
         <a
           href={href}
           aria-label={title}
           title={title}
           rel="noreferrer nofollow"
-          class="group size-full decoration-transparent outline-offset-2 transition-[outline] duration-150 ease-linear select-none hover:outline hover:outline-black focus-visible:outline-black md:text-xl dark:hover:outline-white dark:focus-visible:outline-white"
+          class="group size-full decoration-transparent outline-offset-2 transition-[outline] duration-150 ease-linear select-none hover:outline hover:outline-black focus-visible:outline-black dark:hover:outline-white dark:focus-visible:outline-white"
         >
           <img
             loading="lazy"
