@@ -6,7 +6,7 @@ paths:
 
 # Playwright specs
 
-- Screenshot names are `tests/screenshots/{name}-{project}.png`. A new `toHaveScreenshot` name has no baseline, so CI fails until the Deploy workflow is run with `update-snapshots=true` on the branch. Comparison is skipped locally, so a local pass says nothing about screenshots.
+- Screenshot names are `tests/screenshots/{name}-{project}.png`. A new `toHaveScreenshot` name has no baseline, so CI fails until the Deploy workflow is run with `update-snapshots=true` on the branch. Comparison is skipped locally, so a local pass says nothing about screenshots. The workflow passes `--update-snapshots=all`: a small colour change (gray-500 to gray-400 on black) sits inside the default pixel tolerance, so the default mode left the baselines stale (PR #386).
 - `homepage.png` is a full-page capture at the default 1280px viewport. The per-breakpoint captures (`homepage-{base,sm,md,2xl}-{light,dark}.png`) are also full-page: the breakpoint's viewport width, the whole page height. The breakpoint list in `tests/homepage.spec.ts` mirrors the media queries in the built CSS; update it when a new Tailwind breakpoint is used.
 - Most images are `loading="lazy"`. Scroll each into view and wait for `complete` (the `loadAllImages` helper) before any screenshot.
 - Set dark mode with `page.emulateMedia({ colorScheme: "dark" })`. `test.use({ colorScheme: "dark" })` in a `describe` left the Firefox project in light mode (Playwright 1.63).
