@@ -19,6 +19,7 @@ pnpm --filter www test    # Node's built-in test runner on www/src/**/*.test.ts 
 pnpm run test:site        # Playwright against production
 pnpm run lighthouse       # builds www, serves it, runs Lighthouse CI (3 runs)
 pnpm run lighthouse:site  # Lighthouse CI against production
+pnpm run lighthouse:serve # serve lighthouse-report/ on http://localhost:8080 (wrangler drops .html: open /<name>.report)
 
 # Single test (build www first; the webServer only serves www/dist via serve:pages)
 # Use `pnpm exec playwright test`, not `pnpm test -- <args>`: the latter ignored the file filter and --repeat-each and ran the whole suite
