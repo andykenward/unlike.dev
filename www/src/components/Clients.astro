@@ -5,8 +5,8 @@ const CLIENTS = await getCollection("clients").then((data) =>
   data.sort((a, b) => b.data.sortOrder - a.data.sortOrder),
 );
 
-// The first row (three columns at most) is above the fold and holds the LCP image.
-const EAGER_COUNT = 3;
+// The first row (five columns at most) is above the fold and holds the LCP image.
+const EAGER_COUNT = 5;
 ---
 
 <section>
@@ -15,7 +15,7 @@ const EAGER_COUNT = 3;
   </h2>
   <ul
     aria-labelledby="experience"
-    class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3"
+    class="grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-5"
   >
     {CLIENTS.map(({ data: { href, title, asset } }, index) => (
       <li class="flex aspect-square shrink-0 basis-1/2 items-center justify-center">

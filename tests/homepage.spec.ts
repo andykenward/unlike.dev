@@ -176,10 +176,10 @@ test("prioritises the first row of client logos", async ({ page }) => {
   await expect(logos.first()).toHaveAttribute("fetchpriority", "high");
   await expect(page.locator('img[fetchpriority="high"]')).toHaveCount(1);
 
-  for (const index of [0, 1, 2]) {
+  for (const index of [0, 1, 2, 3, 4]) {
     await expect(logos.nth(index)).toHaveAttribute("loading", "eager");
   }
-  await expect(logos.nth(3)).toHaveAttribute("loading", "lazy");
+  await expect(logos.nth(5)).toHaveAttribute("loading", "lazy");
   await expect(logos.last()).toHaveAttribute("loading", "lazy");
 });
 
