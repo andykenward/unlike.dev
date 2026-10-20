@@ -28,7 +28,7 @@ pnpm exec playwright test -g "has title" --project=chromium
 
 On the dev server the analytics beacon logs a CORS error for `cloudflareinsights.com/cdn-cgi/rum` (the token is bound to `unlike.dev`); that is expected off-production, not a site bug.
 
-Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the repo root; the Astro dev server and `playwright.config.ts` read them, and the devcontainer's `postCreateCommand` generates them.
+Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the repo root; the Astro dev server and `playwright.config.ts` read them, and the devcontainer's `postCreateCommand` generates them (mkcert flags must precede the hostnames; it stops parsing flags at the first positional argument).
 
 ## Architecture
 
