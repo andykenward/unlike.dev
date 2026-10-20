@@ -13,3 +13,6 @@ overrides:
   tmp@<0.2.6: ">=0.2.6"
   basic-ftp@<=6.2.0: ">=6.2.1"
   sharp@<0.35.5: ">=0.35.5"
+
+# shortcut: single-document lockfile so GitHub security alerts keep working (dependabot/dependabot-core#15904); remove once its parser reads multi-document lockfiles
+pmOnFail: ignore
