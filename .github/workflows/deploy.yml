@@ -92,7 +92,8 @@ jobs:
         with:
           node-version-file: "package.json"
           cache: "pnpm"
-      - run: pnpm install
+      # Tests run against the deployed URL, so www's dependencies aren't needed.
+      - run: pnpm install --filter unlike-dev
       - name: Run Playwright tests
         # "all" rewrites every baseline. The default only rewrites ones that
         # fail, so a change inside the pixel tolerance would never land.
@@ -120,7 +121,7 @@ jobs:
     needs:
       - playwright
     timeout-minutes: 5
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:

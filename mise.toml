@@ -1,0 +1,12 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+# Tool versions for local dev (the devcontainer image ships mise).
+# Node comes from `devEngines.runtime` and pnpm from `packageManager` in
+# package.json, which CI also reads; edit versions there, not here.
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "pnpm"]
+
+[env]
+# prek builds Python hooks (zizmor) with uv, which can't use the image's
+# python3-minimal; make uv download its own interpreter instead.
+UV_PYTHON_PREFERENCE = "only-managed"
