@@ -1,19 +1,29 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+// For format details, see https://aka.ms/devcontainer.json.
+// Based on the andykenward/devcontainers-templates "dev" template (v2.0.0).
 {
   "name": "Container - Unlike",
-  "image": "ghcr.io/andykenward/devcontainer-dev:1",
+  "image": "ghcr.io/andykenward/devcontainer-dev:1.3.0",
+
+  // Named volumes survive container rebuilds.
+  //  - Shared across every project with the same prefix: Claude Code login and
+  //    settings, GitHub CLI login, git config (identity, commit signing).
+  //  - Per project: mise tool installs, shell history and VS Code server
+  //    extensions.
   "mounts": [
     "source=devcontainer-claude,target=/home/vscode/.claude,type=volume",
     "source=devcontainer-gh,target=/home/vscode/.config/gh,type=volume",
     "source=devcontainer-git,target=/home/vscode/.config/git,type=volume",
-    "source=devcontainer-mise,target=/home/vscode/.local/share/mise,type=volume",
+    "source=${devcontainerId}-mise,target=/home/vscode/.local/share/mise,type=volume",
     "source=${devcontainerId}-history,target=/commandhistory,type=volume",
     "source=${devcontainerId}-vscode-extensions,target=/home/vscode/.vscode-server/extensions,type=volume"
   ],
-  // "containerEnv": {
-  //   "DEVCONTAINER_STARSHIP_CONFIG": "${containerWorkspaceFolder}/.devcontainer/starship.toml"
-  // },
+
+  // Starship prompt config. Until the project adds .devcontainer/starship.toml
+  // (start from a copy: cp ~/.config/starship.toml .devcontainer/), the image's
+  // default is used. New terminals pick up changes without a rebuild.
+  "containerEnv": {
+    "DEVCONTAINER_STARSHIP_CONFIG": "${containerWorkspaceFolder}/.devcontainer/starship.toml"
+  },
   "features": {
     "ghcr.io/devcontainers-extra/features/mkcert:1": {}
   },
@@ -32,6 +42,10 @@
       }
     }
   },
+
+  // devcontainer-post-create fixes volume ownership, runs `mise install` for
+  // the project's tools and wires git up to gh credentials when logged in
+  // (skipped when a forwarded SSH agent has a key, so git uses SSH instead).
   "postCreateCommand": {
     // Object entries run in parallel; pnpm needs the Node and pnpm that
     // devcontainer-post-create installs from mise.toml, so it runs after.
