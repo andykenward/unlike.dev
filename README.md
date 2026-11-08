@@ -5,10 +5,10 @@ Source for [unlike.dev](https://unlike.dev), the website of Unlike Ltd. Built wi
 ## Requirements
 
 - Node `^24.10.0`
-- pnpm `^11.22.0`
+- pnpm `^12.14.0`
 - [mkcert](https://github.com/FiloSottile/mkcert) for local HTTPS
 
-The included [dev container](.devcontainer/devcontainer.json) sets all of this up, plus Playwright browsers and Claude Code.
+The included [dev container](.devcontainer/devcontainer.json) sets all of this up (mise installs Node and pnpm at the versions in `package.json`), plus Playwright browsers and Claude Code.
 
 ## Getting started
 
