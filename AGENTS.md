@@ -28,6 +28,8 @@ pnpm exec playwright test -g "has title" --project=chromium
 
 On the dev server the analytics beacon logs a CORS error for `cloudflareinsights.com/cdn-cgi/rum` (the token is bound to `unlike.dev`); that is expected off-production, not a site bug.
 
+Local Node and pnpm are installed by mise (shipped in the devcontainer image), but `mise.toml` holds no versions: its `idiomatic_version_file_enable_tools` makes mise read Node from `devEngines.runtime` and pnpm from `packageManager` in `package.json`. Bump versions there (and `engines` alongside). Keep `devEngines.runtime.onFail` at `error`: `download` makes pnpm fetch its own Node and record it in the lockfile. Without that setting mise falls back to the image's global Node, which is outside `engines.node`. `postCreateCommand` entries run in parallel, so anything needing pnpm runs after `devcontainer-post-create` (which runs `mise install`) in the same entry.
+
 Local HTTPS needs mkcert certs `localhost+6.pem` / `localhost+6-key.pem` in the repo root; the Astro dev server and `playwright.config.ts` read them, and the devcontainer's `postCreateCommand` generates them (mkcert flags must precede the hostnames; it stops parsing flags at the first positional argument).
 
 ## Architecture
