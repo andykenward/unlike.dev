@@ -17,3 +17,4 @@ paths:
 - Accessibility scans use the `makeAxeBuilder` fixture in `tests/fixtures.ts` (axe-core, WCAG 2.0/2.1 A and AA tags). Scan light and dark mode separately: contrast differs, and the footer's dark colour was found this way.
 - Chromium hides keepalive requests (the analytics beacon's report) from `request`/`response` listeners until a `route` is attached, so a missing request event does not mean the request was not sent.
 - To catch requests from the first page load, attach listeners to a fresh tab before `goto`. `beforeEach` has already navigated, and a `page.reload()` reports the previous load's lazy image requests as failed in Firefox and WebKit.
+- CI's `playwright` job installs only the root package (`pnpm install --filter unlike-dev`), so specs and `tests/fixtures.ts` must not import from `www/` or its dependencies; add any test dependency to the root `package.json`.
