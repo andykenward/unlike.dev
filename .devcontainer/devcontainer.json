@@ -2,7 +2,9 @@
 // Based on the andykenward/devcontainers-templates "dev" template (v2.0.0).
 {
   "name": "Container - Unlike",
-  "image": "ghcr.io/andykenward/devcontainer-dev:1.3.0",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
 
   // Named volumes survive container rebuilds.
   //  - Shared across every project with the same prefix: Claude Code login and
