@@ -8,6 +8,17 @@
 
 version: 2
 updates:
+  # Dev container image (tag + digest) in .devcontainer/Dockerfile
+  - package-ecosystem: docker
+    assignees:
+      - "andykenward"
+    directory: /.devcontainer
+    schedule:
+      interval: weekly
+      time: "12:00"
+      timezone: "Europe/London"
+    cooldown:
+      default-days: 5
   - package-ecosystem: devcontainers
     assignees:
       - "andykenward"
